@@ -29,7 +29,7 @@ def create
     params[:review][:client_name] = session[:user_name]  
     params[:review][:reviewer] = 'client'
   elsif params[:review][:reviewer] == 'client'
-    # vendor is writing review of client
+
     params[:review][:vendor_name] = session[:user_name]  
     params[:review][:reviewer] = 'vendor'
   end
@@ -58,10 +58,13 @@ end
 def destroy
   review = Review.find(params[:id])
 
-  if (review.reviewer == "vendor" && review.vendor_name == session[:user_name]) ||
-     (review.reviewer == "client" && review.client_name == session[:user_name])
+  current_user = UserAccount.find_by(name: session[:user_name])
+  vendor_account = UserAccount.find_by(name: review.vendor_name)
+  client_account = UserAccount.find_by(name: review.client_name)
+  if (review.reviewer == "vendor" && vendor_account&.email == current_user.email) ||
+     (review.reviewer == "client" && client_account&.email == current_user.email)
     review.destroy
-    flash[:notice] = "Review deleted."
+    flash[:notice] = "Review deleted"
   else
     flash[:alert] = "You can only delete your own reviews."
   end

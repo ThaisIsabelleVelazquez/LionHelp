@@ -40,12 +40,13 @@ Scenario: Show reviews for Barbara Reddington
     Then I should see comments like:
       | They were late to the appointment. |
 
+
 Scenario: Delete a review
-  Given the following review exists:
-    | vendor_name  | title     | comment                    | rating |
-    | Hannah Lasso | Furniture | Personally delivered to me. | 4      |
+  Given I am on the login page
+  When I login with "john@gmail.com" and "password"
+  And I am on the review page
   When I delete the review "Hannah Lasso", "Furniture", "Personally delivered to me.", "4"
-  Then I should see "Review deleted."
+  Then I should see "Review deleted"
 
 Scenario: Create a new review
   Given I am on the new review page
@@ -83,4 +84,3 @@ Scenario: I rate too low
   And I submit the new review
   Then I should see notice "Rating is too low."
   Then I should be on new review page
-
