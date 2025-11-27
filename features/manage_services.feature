@@ -12,6 +12,11 @@ Background:
   Given the following accounts exist:
     | user_id    | name          | email             | password   |
     | 1          | Emily Burnett     | eb1234@columbia.edu    | password   |
+
+  Given the following reviews exist:
+    | client_id | vendor_id | vendor_name          | title      | rating | comment                                                  | reviewer | client_name |
+    | 10          | 1          | Emily Burnett         | Tutoring  | 4      | Explained things clearly                            | client  | John Doe |
+    | 11          | 3          | Hannah Lasso         | Furniture  | 3      | My chair had a scratch on the back.                     | client  | Kathy Lee |
   And I am on the login page
   And I login with "eb1234@columbia.edu" and "password"
 
@@ -30,6 +35,8 @@ Scenario: Create a new service
     When I go to the service details page for "Tutoring"
     Then I should see "Tutoring"
     And I should see "I can help you study for COMSW4001"
+    And I should see "Explained things clearly"
+    And I should not see "My chair had a scratch on the back."
   
   Scenario: See all the services I own
     When I am on my services page
