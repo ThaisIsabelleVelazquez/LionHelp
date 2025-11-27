@@ -99,3 +99,14 @@ Scenario: I edit a review
   Then I should see "Second time around and the service was great!"
   Then I should not see "The nail design was not like the picture I showed."
 
+Scenario: I edit a review with bad ratings
+  When I am on the review home page
+  When I click on "Reviews I Wrote"
+  When I edit the review with comment: "The nail design was not like the picture I showed."
+  And I fill in the review rating with "-10"
+  And I press "Update"
+  Then I should see "Rating is too low."
+  And I fill in the review rating with "11"
+  And I press "Update"
+  Then I should see "Rating is too high."
+
