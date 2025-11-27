@@ -29,6 +29,10 @@ When('I delete the service {string}') do |title|
   click_link 'Delete'
 end
 
+And('I press Delete') do
+  click_link 'Delete'
+end
+
 Then('I should not see {string}') do |text|
   expect(page).not_to have_content(text)
 end
@@ -41,4 +45,8 @@ end
 
 When('I go to the services page') do
   visit services_path
+end
+
+When("I click Edit for the service {string}") do |title|
+  click_link "#{title.parameterize}-edit"
 end

@@ -31,7 +31,7 @@
       <p style="margin: 0 0 8px 0;"><%= number_to_currency(s.price) %></p>
       <small><strong>Category:</strong> <%= s.category.presence || "Uncategorized" %></small>
       <%= link_to 'View', service_path(s), class: 'btn btn-primary', style: 'margin-right: 10px;' %>
-      <%= link_to 'Edit', edit_service_path(s), class: 'btn btn-outline-secondary', style: 'margin-right: 10px;' %>
+      <%= link_to 'Edit', edit_service_path(s), class: 'btn btn-outline-secondary', style: 'margin-right: 10px;', id: "#{s.title.parameterize}-edit"%>
     </div>
   <% end %>
 </div>

@@ -37,3 +37,18 @@ Scenario: Create a new service
     Then I should see "Headshot"
     Then I should not see "Manicures"
   
+  Scenario: I update a service of mine
+    When I am on my services page
+    And I click Edit for the service "Headshot"
+    And I fill in "Price" with "20"
+    And I fill in "Title" with "LinkedIn Shots"
+    And I press "Update"
+    Then I should see "LinkedIn Shots"
+    Then I should see "20"
+
+  Scenario: I delete a service of mine
+    When I am on my services page
+    And I click Edit for the service "Headshot"
+    And I press Delete
+    Then I should not see "Headshot deleted."
+  
