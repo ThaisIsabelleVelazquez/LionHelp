@@ -16,15 +16,15 @@ Scenario: Create a new service
 
   Scenario: View a service
     Given the following service exists:
-      | title        | description              | price | vendor_name |
-      | Laundry Help | Need help folding laundry | 15.00 | Emily  |
+      | title        | description              | price | vendor_name | category  |
+      | Laundry Help | Need help folding laundry | 15.00 | Emily  |  Tutoring  |
     When I go to the service details page for "Laundry Help"
     Then I should see "Laundry Help"
     And I should see "Need help folding laundry"
 
   Scenario: Delete a service
     Given the following service exists:
-      | title        | description              | price | vendor_name |
-      | Laundry Help | Need help folding laundry | 15.00 | Emily  |
+      | title        | description              | price | vendor_name |  category  |
+      | Laundry Help | Need help folding laundry | 15.00 | Emily  |  Tutoring  |
     When I delete the service "Laundry Help"
     Then I should see "Service 'Laundry Help' deleted."

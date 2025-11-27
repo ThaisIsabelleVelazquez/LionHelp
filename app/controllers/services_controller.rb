@@ -4,6 +4,7 @@ class ServicesController < ApplicationController
     end
 
     def index
+      @user_name = session[:user_name]
       if params[:category].present? && params[:category] != "All"
         @services = Service.where(category: params[:category])
       else

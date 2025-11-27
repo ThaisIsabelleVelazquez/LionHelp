@@ -5,9 +5,9 @@ Feature: View all services
 
   Background:
     Given the following services exist:
-      | title                 | description                         | price | vendor_name     |
-      | Meal Swipes           | Swipe access to dining halls         | 9.00  | Kathy Lee  |
-      | Tutoring – COMS W1004 | Personalized help with intro CS      | 25.00 | John Doe   |
+      | title                 | description                         | price | vendor_name     |  category  |
+      | Meal Swipes           | Swipe access to dining halls         | 9.00  | Kathy Lee  |  Meal Swipes  |
+      | Tutoring – COMS W1004 | Personalized help with intro CS      | 25.00 | John Doe   |  Tutoring  |
 
   Scenario: Viewing the list of services
     When I go to the services page
