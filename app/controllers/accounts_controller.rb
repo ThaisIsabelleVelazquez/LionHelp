@@ -1,5 +1,9 @@
 class AccountsController < ApplicationController
   def index
+    current_user = UserAccount.find_by(name: session[:user_name])
+    if current_user
+      redirect_to services_path
+    end
   end
 
   def login
