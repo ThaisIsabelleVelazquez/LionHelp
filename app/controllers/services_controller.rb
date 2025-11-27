@@ -38,6 +38,22 @@ class ServicesController < ApplicationController
       @services = Service.where(vendor_name: session[:user_name])
     end
 
+    def edit
+      @service = Service.find(params[:id])
+    end
+
+    def update
+      @service = Service.find(params[:id])
+
+      if @service.update(service_params)
+        flash[:notice] = "#{@service.title} was successfully updated."
+        redirect_to service_path(@service)
+      else
+        flash[:notice] = "An error occured while updating #{@service.title}."
+        render :edit
+      end
+    end
+
     private
   
     def service_params

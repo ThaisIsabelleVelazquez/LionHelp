@@ -1,0 +1,30 @@
+<h2>Edit Service</h2>
+
+<%= form_tag service_path(@service), :method => :put do %>
+  <%= label :service, :title, 'Title', class: 'col-form-label' %>
+  <%= text_field :service, :title, class: 'form-control' %>
+
+  <%= label :service, :vendor_name, 'Vendor Name', class: 'col-form-label' %>
+  <%= text_field :service, :vendor_name, class: 'form-control' %>
+
+  <%= label :service, :description, 'Description', class: 'col-form-label' %>
+  <%= text_area :service, :description, class: 'form-control' %>
+
+  <%= label :service, :price, 'Price', class: 'col-form-label' %>
+  <%= number_field :service, :price, step: 0.01, class: 'form-control' %>
+
+  <%= label :service, :category, 'Category', class: 'col-form-label' %>
+    <%= select :service, :category, 
+    ['Tutoring', 'Food', 'Cleaning', 'Transportation', 'Tech Help', 'Other'], 
+    {}, 
+    class: 'form-control' %>
+
+  <br/>
+  <%= submit_tag 'Update', class: 'btn btn-primary' %>
+  <%= link_to "Delete",
+              service_path(@service),
+              method: :delete,
+              data: { confirm: "Are you sure?" },
+              class: 'btn btn-outline-danger' %>
+  <%= link_to 'Cancel', user_services_path, class: 'btn', style: 'text-decoration: underline;'%>
+<% end %>
