@@ -6,12 +6,12 @@ Feature: Manage Reviews
 Background: reviews in database
 
   Given the following accounts exist:
-    | name              | email              | password |
-    | John Doe          | jd1234@columbia.edu     | password |
-    | Kathy Lee         | kl1234@barnard.edu    | password |
-    | Hannah Lasso      | hl1234@barnard.edu   | password |
-    | Barbara Reddington| br1234@barnard.edu  | password |
-    | Janine Abbott     | ja1234@columbia.edu   | password |
+    |  user_id  | name              | email              | password |
+    |  1     | John Doe          | jd1234@columbia.edu     | password |
+    |  10    | Kathy Lee         | kl1234@barnard.edu    | password |
+    |  3     | Hannah Lasso      | hl1234@barnard.edu   | password |
+    |  4     | Barbara Reddington| br1234@barnard.edu  | password |
+    |  11    | Janine Abbott     | ja1234@columbia.edu   | password |
 
   Given the following reviews exist:
     | client_id | vendor_id | vendor_name          | title      | rating | comment                                                  | reviewer | client_name |
@@ -86,3 +86,16 @@ Scenario: I rate too low
   And I submit the new review
   Then I should see notice "Rating is too low."
   Then I should be on new review page
+
+Scenario: I edit a review
+  When I am on the review home page
+  When I click on "Reviews I Wrote"
+  Then I should see "The nail design was not like the picture I showed."
+  Then I should not see "Sold at a really good price"
+  When I edit the review with comment: "The nail design was not like the picture I showed."
+  And I fill in the review rating with "10"
+  And I fill in the review content with "Second time around and the service was great!"
+  And I press "Update"
+  Then I should see "Second time around and the service was great!"
+  Then I should not see "The nail design was not like the picture I showed."
+

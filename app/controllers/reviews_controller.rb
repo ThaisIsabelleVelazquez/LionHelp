@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :require_login
+
   def index
     @reviews = Review.all
 
@@ -7,7 +8,7 @@ class ReviewsController < ApplicationController
       @reviews = @reviews.where(reviewer: "client", vendor_name: session[:user_name])
 
     elsif params[:filter] == "written_by_me" && session[:user_name].present?
-      @reviews = @reviews.where(client_name: session[:user_name]).or(
+      @reviews = @reviews.where(client_name: session[:user_name], reviewer: "client").or(
         @reviews.where(vendor_name: session[:user_name], reviewer: "vendor")
       )
 
@@ -18,7 +19,6 @@ class ReviewsController < ApplicationController
       @reviews = @reviews.where(reviewer: "client")
     end
   end
-
 
   def new
     @review = Review.new
@@ -70,7 +70,7 @@ def destroy
     flash[:alert] = "You can only delete your own reviews."
   end
 
-  redirect_to reviews_path
+  redirect_to reviews_path(filter: "written_by_me")
 end
 
 
@@ -88,5 +88,39 @@ end
     client_id = params[:client_id]
     @client_reviews = Review.client_reviews(client_id)
     redirect_to reviews_path, notice: "'#{client_id}' has no reviews info" if @client_reviews.blank?
+  end
+
+  def edit
+    @review = Review.find(params[:id])
+    puts @review
+    if @review[:reviewer] == "client"
+      @role = "Vendor"
+      @user_of_interest = UserAccount.find_by(user_id: @review[:vendor_id])
+    else
+      @role = "Client"
+      @user_of_interest = UserAccount.find_by(user_id: @review[:client_id])
+    end
+  end
+
+  def update
+    @review = Review.find(params[:id])
+    if @review[:reviewer] == "client"
+      @role = "Vendor"
+      @user_of_interest = UserAccount.find_by(user_id: @review[:vendor_id])
+    else
+      @role = "Client"
+      @user_of_interest = UserAccount.find_by(user_id: @review[:client_id])
+    end
+
+    if review_params[:rating].to_i > 10
+      flash.now[:warning] = "Rating is too high."
+      render :edit and return
+    elsif review_params[:rating].to_i < 0
+      flash.now[:warning] = "Rating is too low."
+      render :edit and return
+    elsif @review.update(review_params)
+      flash[:notice] = "Review was successfully updated."
+      redirect_to reviews_path(filter: "written_by_me")
+    end
   end
 end
