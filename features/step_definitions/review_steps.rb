@@ -58,12 +58,12 @@ When('I delete the review {string}, {string}, {string}, {string}') do |vendor_na
     comment: comment,
     rating: rating
   )
-  visit reviews_path
-  within("#review_#{review.id}") do
-    click_link 'Delete'
-  end
+  click_link "review-#{review.id}-delete"
 end
 
+When('I click on {string}') do | title |
+  click_on title
+end
 
 When(/^I select "([^"]*)" from "([^"]*)"$/) do |option, field|
   select(option, from: field)

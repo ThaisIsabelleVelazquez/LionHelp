@@ -45,7 +45,8 @@ Scenario: Show reviews for Barbara Reddington
 
 
 Scenario: Delete a review
-  When I am on the review page
+  When I am on the review home page
+  When I click on "Reviews I Wrote"
   When I delete the review "Hannah Lasso", "Furniture", "Personally delivered to me.", "4"
   Then I should see "Review deleted"
 
