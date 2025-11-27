@@ -1,4 +1,5 @@
 class ServicesController < ApplicationController
+    before_action :require_login
     def new
       @service = Service.new
     end
