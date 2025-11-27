@@ -25,6 +25,8 @@ class ServicesController < ApplicationController
   
     def show
       @service = Service.find(params[:id])
+      @reviews = Review.where(reviewer: "client", vendor_name: @service.vendor_name)
+      puts @reviews
     end
   
     def destroy
