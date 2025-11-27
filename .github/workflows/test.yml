@@ -1,0 +1,23 @@
+name: Testing
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+
+  test:
+    name: Cucumber and Rspec Testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install dependencies
+        run: bundle install
+      - name: Cucumber
+        run: bundle exec cucumber
+      - name: Rspec
+        run: bundle exec rspec
