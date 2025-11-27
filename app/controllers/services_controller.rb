@@ -34,6 +34,10 @@ class ServicesController < ApplicationController
       redirect_to services_path
     end
   
+    def user_services
+      @services = Service.where(vendor_name: session[:user_name])
+    end
+
     private
   
     def service_params
