@@ -42,11 +42,6 @@
 </style>
 
 <div class="centered">
-  <% flash.each do |key, message| %>
-    <p class="<%= key %>"><%= message %></p>
-  <% end %>
-
-
   <h2>
     <% if params[:filter] == "written_by_me" %>
       Reviews I Wrote
@@ -73,6 +68,10 @@
           <strong>Comment:</strong> <%= review.comment %>
         </div>
         <% if params[:filter] == "written_by_me" %>
+          <%= link_to 'Edit', edit_review_path(review),
+          class: 'btn btn-secondary',
+          id: "review-#{review.id}-edit",
+          style: "margin-right: 0px;" %>
           <div class="delete-btn-box">
             <%= link_to 'Delete', review_path(review),
                   method: :delete,
