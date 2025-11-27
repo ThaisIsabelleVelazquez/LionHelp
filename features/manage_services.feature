@@ -3,6 +3,16 @@ Feature: Manage Services
     I want to create, view, and delete services
     So that I can post and manage service requests
 
+Background:
+  Given the following services exist:
+    | title        | description              | price | vendor_name | category  |
+    | Laundry Help | Need help folding laundry | 15.00 | Emily  |  Tutoring  |
+  Given the following accounts exist:
+    | user_id    | name          | email             | password   |
+    | 1          | John Doe      | jd1234@columbia.edu    | password   |
+  And I am on the login page
+  And I login with "jd1234@columbia.edu" and "password"
+
 Scenario: Create a new service
     Given I am on the new service page
     When I fill in "Title" with "Laundry Help"
@@ -15,16 +25,10 @@ Scenario: Create a new service
 
 
   Scenario: View a service
-    Given the following service exists:
-      | title        | description              | price | vendor_name | category  |
-      | Laundry Help | Need help folding laundry | 15.00 | Emily  |  Tutoring  |
     When I go to the service details page for "Laundry Help"
     Then I should see "Laundry Help"
     And I should see "Need help folding laundry"
 
   Scenario: Delete a service
-    Given the following service exists:
-      | title        | description              | price | vendor_name |  category  |
-      | Laundry Help | Need help folding laundry | 15.00 | Emily  |  Tutoring  |
     When I delete the service "Laundry Help"
     Then I should see "Service 'Laundry Help' deleted."

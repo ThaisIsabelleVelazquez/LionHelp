@@ -14,12 +14,6 @@ Then('I should see {string}') do |text|
   expect(page).to have_content(text)
 end
 
-Given('the following service exists:') do |table|
-  table.hashes.each do |row|
-    Service.create!(row)
-  end
-end
-
 When('I go to the service details page for {string}') do |title|
   service = Service.find_by(title: title)
   visit service_path(service)

@@ -5,23 +5,26 @@ Feature: Manage Reviews
 
 Background: reviews in database
 
-Given the following accounts exist:
-  | name              | email              | password |
-  | John Doe          | jd1234@columbia.edu     | password |
-  | Kathy Lee         | kl1234@barnard.edu    | password |
-  | Hannah Lasso      | hl1234@barnard.edu   | password |
-  | Barbara Reddington| br1234@barnard.edu  | password |
-  | Janine Abbott     | ja1234@columbia.edu   | password |
+  Given the following accounts exist:
+    | name              | email              | password |
+    | John Doe          | jd1234@columbia.edu     | password |
+    | Kathy Lee         | kl1234@barnard.edu    | password |
+    | Hannah Lasso      | hl1234@barnard.edu   | password |
+    | Barbara Reddington| br1234@barnard.edu  | password |
+    | Janine Abbott     | ja1234@columbia.edu   | password |
 
-Given the following reviews exist:
-  | client_id | vendor_id | vendor_name          | title      | rating | comment                                                  | reviewer | client_name |
-  | 1          | 3          | Hannah Lasso         | Furniture  | 4      | Personally delivered to me.                             | client  | John Doe |
-  | 2          | 3          | Hannah Lasso         | Furniture  | 3      | My chair had a scratch on the back.                     | client  | Kathy Lee |
-  | 5          | 3          | Hannah Lasso         | Furniture  | 5      | Was really friendly.                                    | client  | Janine Abbott |
-  | 4          | 3          | Hannah Lasso         | Furniture  | 5      | Sold at a really good price                             | client  | Barbara Reddington |
-  | 1          | 4          | Barbara Reddington   | Manicure   | 1      | The nail design was not like the picture I showed.      | client  | John Doe |
-  | 4          | 1          | John Doe             | Haircut   | 2      | They were late to the appointment.                      | vendor  | Barbara Reddington |
-  | 3          | 4          | Barbara Reddington   | Manicure   | 1      | They were so rude to me.                               | client  | Hannah Lasso |
+  Given the following reviews exist:
+    | client_id | vendor_id | vendor_name          | title      | rating | comment                                                  | reviewer | client_name |
+    | 1          | 3          | Hannah Lasso         | Furniture  | 4      | Personally delivered to me.                             | client  | John Doe |
+    | 2          | 3          | Hannah Lasso         | Furniture  | 3      | My chair had a scratch on the back.                     | client  | Kathy Lee |
+    | 5          | 3          | Hannah Lasso         | Furniture  | 5      | Was really friendly.                                    | client  | Janine Abbott |
+    | 4          | 3          | Hannah Lasso         | Furniture  | 5      | Sold at a really good price                             | client  | Barbara Reddington |
+    | 1          | 4          | Barbara Reddington   | Manicure   | 1      | The nail design was not like the picture I showed.      | client  | John Doe |
+    | 4          | 1          | John Doe             | Haircut   | 2      | They were late to the appointment.                      | vendor  | Barbara Reddington |
+    | 3          | 4          | Barbara Reddington   | Manicure   | 1      | They were so rude to me.                               | client  | Hannah Lasso |
+
+  And I am on the login page
+  And I login with "jd1234@columbia.edu" and "password"
 
 
 Scenario: Show all reviews
@@ -42,9 +45,7 @@ Scenario: Show reviews for Barbara Reddington
 
 
 Scenario: Delete a review
-  Given I am on the login page
-  When I login with "jd1234@columbia.edu" and "password"
-  And I am on the review page
+  When I am on the review page
   When I delete the review "Hannah Lasso", "Furniture", "Personally delivered to me.", "4"
   Then I should see "Review deleted"
 

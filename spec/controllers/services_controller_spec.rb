@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe ServicesController, type: :controller do
+
+  let(:user) { UserAccount.create!(
+    name: "Kristine Pham", 
+    email: "klp2157@barnard.edu", 
+    password: "password") 
+  }
+
   let(:valid_attributes) do
     {
       title: "Laundry Help",
@@ -15,6 +22,10 @@ RSpec.describe ServicesController, type: :controller do
   let(:invalid_missing_description) { valid_attributes.except(:description) }
   let(:invalid_missing_vendor_name) { valid_attributes.except(:vendor_name) }
   let(:invalid_negative_price) { valid_attributes.merge(price: -5) }
+
+  before do
+    session[:user_name] = user.name
+  end
 
   describe "GET #index" do
     it "assigns all services and renders index" do
