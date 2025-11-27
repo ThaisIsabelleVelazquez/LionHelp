@@ -45,7 +45,7 @@ class ServicesController < ApplicationController
     def update
       @service = Service.find(params[:id])
       if service_params[:price].to_i < 0
-        flash[:warning] = "Price is negative."
+        flash.now[:warning] = "Price is negative."
         render :edit
       elsif @service.update(service_params)
         flash[:notice] = "#{@service.title} was successfully updated."
