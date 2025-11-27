@@ -135,4 +135,40 @@ RSpec.describe ServicesController, type: :controller do
       expect(response).to redirect_to(services_path)
     end
   end
+
+  describe "GET #user_services" do
+    let!(:my_service) do
+      Service.create!(
+        title: "Laundry",
+        description: "Fold clothes",
+        price: 10,
+        vendor_name: "Kristine Pham",
+        category: "Cleaning",
+        vendor_id: 1
+      )
+    end
+
+    let!(:other_service) do
+      Service.create!(
+        title: "Tutoring",
+        description: "Math Help",
+        price: 20,
+        vendor_name: "Bob",
+        category: "Tutoring",
+        vendor_id: 10
+      )
+    end
+
+    it "assigns only the services created by the logged-in user" do
+      get :user_services, params: { id: my_service }
+
+      expect(assigns(:services)).to eq([my_service])
+      expect(assigns(:services)).not_to include(other_service)
+    end
+
+    it "renders the user_services template" do
+      get :user_services
+      expect(response).to render_template(:user_services)
+    end
+  end
 end

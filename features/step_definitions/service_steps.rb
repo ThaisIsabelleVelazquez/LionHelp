@@ -2,6 +2,10 @@ Given('I am on the new service page') do
   visit new_service_path
 end
 
+Given('I am on my services page') do
+  visit user_services_path
+end
+
 When('I fill in {string} with {string}') do |field, value|
   fill_in field, with: value
 end
