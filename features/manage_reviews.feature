@@ -43,7 +43,7 @@ Scenario: Show reviews for Barbara Reddington
 
 Scenario: Delete a review
   Given I am on the login page
-  When I login with "john@columbia.edu" and "password"
+  When I login with "jd1234@columbia.edu" and "password"
   And I am on the review page
   When I delete the review "Hannah Lasso", "Furniture", "Personally delivered to me.", "4"
   Then I should see "Review deleted"
