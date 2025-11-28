@@ -31,7 +31,9 @@ services = [
   { vendor_id: 7, title: 'Resume Review & Interview Prep', vendor_name: 'Emily Chen', description: 'Peer review of CS and engineering resumes. Includes mock interviews.', price: 30.00, category: 'Tutoring' },
   { vendor_id: 8, title: 'Bike Rentals Around Campus', vendor_name: 'Lina Morales', description: 'Rent my foldable bike for quick trips around Morningside Heights.', price: 15.00, category: 'Transportation' },
   { vendor_id: 9, title: 'Laundry Folding Service', vendor_name: 'Maya Brooks', description: 'I’ll fold and organize your washed clothes for you. Pickup from John Jay.', price: 12.00, category: 'Cleaning' },
-  { vendor_id: 10, title: 'Headshots for LinkedIn', vendor_name: 'Chris Ramos', description: 'Quick professional headshots taken on Low Steps. DSLR + retouching included.', price: 25.00, category: 'Other' }
+  { vendor_id: 10, title: 'Headshots for LinkedIn', vendor_name: 'Chris Ramos', description: 'Quick professional headshots taken on Low Steps. DSLR + retouching included.', price: 25.00, category: 'Other' },
+  { vendor_id: 1, title: 'Manicures', vendor_name: 'John Doe', description: 'Able to do acrylics, gel, and more!', price: 65.00, category: 'Other' },
+  { vendor_id: 1, title: 'Moving Out Services', vendor_name: 'John Doe', description: 'Focus on finals while I package and prep your room for moving out in one day.', price: 25.00, category: 'Other' }
 ]
 
 Service.delete_all
@@ -41,7 +43,7 @@ end
 
 puts "Created #{Service.count} services!"
 
-# --- Create Reviews from client to vendor ---
+# --- Create Reviews from client to vendor and vendor to client ---
 reviews = [
     { client_id: 2, vendor_id: 1, vendor_name: 'John Doe', title: 'Manicure', rating: 5, comment: 'My nails look amazing!', reviewer: "client", client_name: "Kathy Lee" },
     { client_id: 1, vendor_id: 2, vendor_name: 'Kathy Lee', title: 'Meal Swipes', rating: 4, comment: 'Super nice person', reviewer: "vendor", client_name: "John Doe" },

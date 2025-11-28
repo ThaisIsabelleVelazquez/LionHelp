@@ -77,3 +77,13 @@ Scenario: I logout and I am back to login page
   Then I should see "Welcome, John Doe"
   When I click Logout
   Then I should be on login page
+
+Scenario: I access the app without logging in
+  When I go to the services page
+  Then I should see "Please log in to access the app."
+  When I am on the new service page
+  Then I should see "Please log in to access the app."
+  When I am on the new review page
+  Then I should see "Please log in to access the app."
+  When I am on the review home page
+  Then I should see "Please log in to access the app."

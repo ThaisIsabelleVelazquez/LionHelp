@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe ServicesController, type: :controller do
+
+  let(:user) { UserAccount.create!(
+    name: "Kristine Pham", 
+    email: "klp2157@barnard.edu", 
+    password: "password") 
+  }
+
   let(:valid_attributes) do
     {
       title: "Laundry Help",
@@ -10,11 +17,25 @@ RSpec.describe ServicesController, type: :controller do
       category: "Cleaning"
     }
   end
+  let!(:my_service) do
+    Service.create!(
+      title: "Laundry",
+      description: "Fold clothes",
+      price: 10,
+      vendor_name: "Kristine Pham",
+      category: "Cleaning",
+      vendor_id: 1
+    )
+  end
 
   let(:invalid_missing_title) { valid_attributes.except(:title) }
   let(:invalid_missing_description) { valid_attributes.except(:description) }
   let(:invalid_missing_vendor_name) { valid_attributes.except(:vendor_name) }
   let(:invalid_negative_price) { valid_attributes.merge(price: -5) }
+
+  before do
+    session[:user_name] = user.name
+  end
 
   describe "GET #index" do
     it "assigns all services and renders index" do
@@ -122,6 +143,54 @@ RSpec.describe ServicesController, type: :controller do
 
       expect(flash[:notice]).to eq("Service '#{service.title}' deleted.")
       expect(response).to redirect_to(services_path)
+    end
+  end
+
+  describe "GET #user_services" do
+
+    let!(:other_service) do
+      Service.create!(
+        title: "Tutoring",
+        description: "Math Help",
+        price: 20,
+        vendor_name: "Bob",
+        category: "Tutoring",
+        vendor_id: 10
+      )
+    end
+
+    it "shows only the services created by the logged-in user" do
+      get :user_services, params: { id: my_service }
+
+      expect(assigns(:services)).to eq([my_service])
+      expect(assigns(:services)).not_to include(other_service)
+    end
+  end
+
+  describe "PATCH #update" do
+    let(:updated_attributes) do
+      { title: "Updated Laundry", description: "Updated desc", price: 15, category: "Food"}
+    end
+    it "updates the service when attributes are valid" do
+      patch :update, params: { id: my_service.id, service: updated_attributes }
+
+      my_service.reload
+      expect(my_service.title).to eq("Updated Laundry")
+      expect(my_service.description).to eq("Updated desc")
+      expect(my_service.price).to eq(15)
+      expect(my_service.category).to eq("Food")
+      expect(my_service.vendor_name).to eq("Kristine Pham")
+    end
+
+    let(:bad_attr) do
+      { title: "title", description: "desc", price: -15, category: "Food"}
+    end
+    it "does not update service if attributes are invalid" do
+      patch :update, params: { id: my_service.id, service: bad_attr }
+
+      my_service.reload
+      expect(my_service.price).to eq(10)
+      expect(response).to render_template(:edit)
     end
   end
 end

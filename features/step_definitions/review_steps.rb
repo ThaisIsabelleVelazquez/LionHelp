@@ -56,14 +56,21 @@ When('I delete the review {string}, {string}, {string}, {string}') do |vendor_na
     vendor_name: vendor_name,
     title: title,
     comment: comment,
-    rating: rating
+    rating: rating.to_i
   )
-  visit reviews_path
-  within("#review_#{review.id}") do
-    click_link 'Delete'
-  end
+  click_link "review-#{review.id}-delete"
 end
 
+When('I edit the review with comment: {string}') do | comment |
+  review = Review.find_by(comment: comment)
+  puts Review.all.pluck(:vendor_name, :title, :comment, :rating)
+  puts review.inspect
+  click_link "review-#{review.id}-edit"
+end
+
+When('I click on {string}') do | title |
+  click_on title
+end
 
 When(/^I select "([^"]*)" from "([^"]*)"$/) do |option, field|
   select(option, from: field)

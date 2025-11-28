@@ -42,15 +42,15 @@
 </style>
 
 <div class="centered">
-  <% flash.each do |key, message| %>
-    <p class="<%= key %>"><%= message %></p>
-  <% end %>
-
-
-  <h2>Reviews</h2>
+  <h2>
+    <% if params[:filter] == "written_by_me" %>
+      Reviews I Wrote
+    <% else %>
+      Reviews About Me
+    <% end %>
+  </h2>
 
 <div class="button-row">
-  <%= link_to 'All Reviews', reviews_path, class: 'btn btn-primary' %>
   <%= link_to 'Reviews About Me (Vendor)', reviews_path(filter: 'about_me_vendor'), class: 'btn btn-primary' %>
   <%= link_to 'Reviews I Wrote', reviews_path(filter: 'written_by_me'), class: 'btn btn-primary' %>
   <%= link_to 'Write a New Review', new_review_path, class: 'btn btn-primary' %>
@@ -67,12 +67,19 @@
           <strong>Rating:</strong> <%= review.rating %><br>
           <strong>Comment:</strong> <%= review.comment %>
         </div>
-        <div class="delete-btn-box">
-          <%= link_to 'Delete', review_path(review),
-                method: :delete,
-                data: { confirm: 'Are you sure you want to delete this review?' },
-                class: 'btn btn-danger' %>
-        </div>
+        <% if params[:filter] == "written_by_me" %>
+          <%= link_to 'Edit', edit_review_path(review),
+          class: 'btn btn-secondary',
+          id: "review-#{review.id}-edit",
+          style: "margin-right: 0px;" %>
+          <div class="delete-btn-box">
+            <%= link_to 'Delete', review_path(review),
+                  method: :delete,
+                  id: "review-#{review.id}-delete",
+                  data: { confirm: 'Are you sure you want to delete this review?' },
+                  class: 'btn btn-danger' %>
+          </div>
+        <% end %>
       </li>
     <% end %>
   </ul>

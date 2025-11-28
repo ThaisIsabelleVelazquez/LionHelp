@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Service, type: :model do
-  let(:valid_attributes) { { title: "Laundry Help", description: "Fold laundry", price: 15, vendor_name: "Emily" } }
+  let(:valid_attributes) { { title: "Laundry Help", description: "Fold laundry", price: 15, vendor_name: "Emily", category: "Tutoring" } }
 
   it 'is valid with all attributes' do
     expect(Service.new(valid_attributes)).to be_valid
