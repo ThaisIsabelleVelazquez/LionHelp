@@ -1,0 +1,87 @@
+<h1 class="mb-4">Search Reviews</h1>
+
+<style>
+  .search-tab-btn {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .search-tab-btn.active {
+    background-color: #C9E6F4 !important;
+    color: black !important;
+    border-color: #C9E6F4 !important;
+  }
+
+  .search-submit-btn {
+    background-color: #C9E6F4 !important;
+    color: black !important;
+    border-color: #C9E6F4 !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .search-submit-btn:hover {
+    background-color: #b2d7ea !important;
+  }
+
+  /* Table styling for alternating colors */
+  table.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table.custom-table th,
+  table.custom-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+
+  table.custom-table tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* white */
+  }
+
+  table.custom-table tbody tr:nth-child(even) {
+    background-color: #C9E6F4; /* pastel blue */
+  }
+
+  table.custom-table thead {
+    background-color: #007bff; /* header color, can adjust */
+    color: white;
+  }
+</style>
+
+<div class="d-flex gap-2 mb-3">
+  <%= form_with url: search_reviews_path, method: :get, local: true, class: "d-flex w-100 gap-2" do %>
+    <%= text_field_tag :q, @query, placeholder: "Search reviews...", class: "form-control" %>
+    <%= submit_tag "Search", class: "btn search-submit-btn" %>
+  <% end %>
+</div>
+
+<div class="d-flex gap-3 mb-4">
+  <%= link_to "Reviews", search_reviews_path, class: "btn search-tab-btn active" %>
+  <%= link_to "Services", search_services_path, class: "btn search-tab-btn" %>
+</div>
+
+<table class="custom-table mt-3">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Comment</th>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @results.each do |review| %>
+      <tr>
+        <td><%= review.title %></td>
+        <td><%= review.comment.truncate_words(20) %></td>
+        <td>
+          <% if review.reviewer == "client" %>
+            <%= review.vendor_name %>
+          <% else %>
+            <%= review.client_name %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
