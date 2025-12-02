@@ -10,7 +10,7 @@
 </style>
 
 <nav class="navbar navbar-expand-lg custom-navbar mb-3 justify-content-center">
-  <a class="navbar-brand" href="#">Lion Help!</a>
+  <%= link_to "Lion Help!", services_path, class: "navbar-brand" %>
   <ul class="navbar-nav">
     <li class="nav-item"><%= link_to 'Services', services_path, class: 'nav-link' %></li>
     <li class="nav-item"><%= link_to 'Reviews', reviews_path, class: 'nav-link' %></li>

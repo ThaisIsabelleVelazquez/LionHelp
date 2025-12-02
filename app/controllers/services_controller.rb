@@ -11,6 +11,13 @@ class ServicesController < ApplicationController
     
     @services = Service.all
 
+    if params[:search].present?
+      @services = @services.where(
+        "title LIKE :q OR description LIKE :q",
+        q: "%#{params[:search]}%"
+      )
+    end
+
     
     if params[:category].present? && params[:category] != "All"
       @services = @services.where(category: params[:category])
