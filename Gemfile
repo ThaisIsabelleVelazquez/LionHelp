@@ -52,3 +52,4 @@ group :test do
 end
 
 gem "simplecov-rspec", "~> 0.1", groups: [:development, :test]
+gem "ransack", "~> 4.4"
