@@ -4,14 +4,32 @@
 <h3 style="text-align: center; margin-bottom: 20px;">
   All Services
 </h3>
+
 <div style="text-align: center; margin-bottom: 20px;">
   <%= form_with url: services_path, method: :get, local: true do %>
+
+  
     <%= select_tag :category,
       options_for_select(['All', 'Tutoring', 'Food', 'Cleaning', 'Transportation', 'Tech Help', 'Other'], params[:category]),
       prompt: "Filter by Category",
       class: "form-control",
       style: "width: 200px; display: inline-block; margin-right: 10px;",
       onchange: "this.form.submit();" %>
+
+   
+    <%= select_tag :price_sort,
+      options_for_select(
+        [
+          ['Sort by Price', ''],
+          ['Price: Low → High', 'asc'],
+          ['Price: High → Low', 'desc']
+        ],
+        params[:price_sort]
+      ),
+      class: "form-control",
+      style: "width: 200px; display: inline-block;",
+      onchange: "this.form.submit();" %>
+
   <% end %>
 </div>
 
