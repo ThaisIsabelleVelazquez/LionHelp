@@ -7,11 +7,11 @@ Background: reviews in database
 
   Given the following accounts exist:
     |  user_id  | name              | email              | password |
-    |  1     | John Doe          | jd1234@columbia.edu     | password |
-    |  10    | Kathy Lee         | kl1234@barnard.edu    | password |
-    |  3     | Hannah Lasso      | hl1234@barnard.edu   | password |
-    |  4     | Barbara Reddington| br1234@barnard.edu  | password |
-    |  11    | Janine Abbott     | ja1234@columbia.edu   | password |
+    |  1     | John Doe          | jd1234@columbia.edu     | Password1! |
+    |  10    | Kathy Lee         | kl1234@barnard.edu    | Password1! |
+    |  3     | Hannah Lasso      | hl1234@barnard.edu   | Password1! |
+    |  4     | Barbara Reddington| br1234@barnard.edu  | Password1! |
+    |  11    | Janine Abbott     | ja1234@columbia.edu   | Password1! |
 
   Given the following reviews exist:
     | client_id | vendor_id | vendor_name          | title      | rating | comment                                                  | reviewer | client_name |
@@ -24,7 +24,7 @@ Background: reviews in database
     | 3          | 4          | Barbara Reddington   | Manicure   | 1      | They were so rude to me.                               | client  | Hannah Lasso |
 
   And I am on the login page
-  And I login with "jd1234@columbia.edu" and "password"
+  And I login with "jd1234@columbia.edu" and "Password1!"
 
 
 Scenario: Show all reviews

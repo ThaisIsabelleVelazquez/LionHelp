@@ -10,9 +10,9 @@ Feature: View all services
       | Tutoring – COMS W1004 | Personalized help with intro CS      | 25.00 | John Doe   |  Tutoring  |
     Given the following accounts exist:
       | user_id    | name          | email             | password   |
-      | 1          | John Doe      | jd1234@columbia.edu    | password   |
+      | 1          | John Doe      | jd1234@columbia.edu    | Password1!   |
     And I am on the login page
-    And I login with "jd1234@columbia.edu" and "password"
+    And I login with "jd1234@columbia.edu" and "Password1!"
 
   Scenario: Viewing the list of services
     When I go to the services page

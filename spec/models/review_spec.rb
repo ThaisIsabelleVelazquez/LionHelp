@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Review, type: :model do
-  let!(:vendor1) { UserAccount.create!(name: 'John Doe', email: 'jd1234@columbia.edu', password: 'password') }
-  let!(:vendor2) { UserAccount.create!(name: 'Jane Smith', email: 'jd1234@barnard.edu', password: 'password') }
-  let!(:client1) { UserAccount.create!(name: 'Alice Johnson', email: 'aj1234@barnard.edu', password: 'password') }
-  let!(:client2) { UserAccount.create!(name: 'Bob Lee', email: 'bl1234@columbia.edu', password: 'password') }
+  let!(:vendor1) { UserAccount.create!(name: 'John Doe', email: 'jd1234@columbia.edu', password: 'Password1!') }
+  let!(:vendor2) { UserAccount.create!(name: 'Jane Smith', email: 'jd1234@barnard.edu', password: 'Password1!') }
+  let!(:client1) { UserAccount.create!(name: 'Alice Johnson', email: 'aj1234@barnard.edu', password: 'Password1!') }
+  let!(:client2) { UserAccount.create!(name: 'Bob Lee', email: 'bl1234@columbia.edu', password: 'Password1!') }
 
   describe '.vendor_reviews' do
     it 'returns blank when vendor_id does not exist' do

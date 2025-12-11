@@ -6,7 +6,7 @@ RSpec.describe UserAccount, type: :model do
     account = UserAccount.new(
       name: "Kristine Pham",
       email: "klp2157@barnard.edu",
-      password: "password"
+      password: "Password1!"
     )
     expect(account).to be_valid
   end
@@ -15,7 +15,7 @@ RSpec.describe UserAccount, type: :model do
     account = UserAccount.new(
       name: "Kristine Pham",
       email: "klp2157@gmail.com",
-      password: "password"
+      password: "Password1!"
     )
     expect(account).not_to be_valid
     expect(account.errors[:email]).to include("must be a valid Columbia or Barnard email address")
@@ -25,7 +25,7 @@ RSpec.describe UserAccount, type: :model do
     account = UserAccount.new(
       name: "Kristine Pham",
       email: "klp2157@columbia.edu!",
-      password: "password"
+      password: "Password1!"
     )
     expect(account).not_to be_valid
     expect(account.errors[:email]).to include("must be a valid Columbia or Barnard email address")
@@ -34,7 +34,7 @@ RSpec.describe UserAccount, type: :model do
   it 'is invalid with empty name field' do
     account = UserAccount.new(
       email: "klp2157@columbia.edu",
-      password: "password"
+      password: "Password1!"
     )
     expect(account).not_to be_valid
     expect(account.errors[:name]).to include("can't be blank")
@@ -50,15 +50,27 @@ RSpec.describe UserAccount, type: :model do
     UserAccount.create!(
       name: "Kristine Pham",
       email: "jd1234@columbia.edu",
-      password: "password"
+      password: "Password1!"
     )
     
     account = UserAccount.new(
       name: "Kristine Pham",
       email: "jd1234@columbia.edu",
-      password: "password"
+      password: "Password1!"
     )
     expect(account).to_not be_valid
     expect(account.errors[:email]).to include("email already exists")
   end
+
+  it 'is invalid with a weak password' do
+    account = UserAccount.new(
+      name: "Kristine Pham",
+      email: "kp1234@columbia.edu",
+      password: "weakpassword"  
+    )
+  
+    expect(account).not_to be_valid
+    expect(account.errors[:password]).to include("must be a strong password that is at least 8 characters and includes a lowercase letter, an uppercase letter, a number, and a special character")
+  end
+  
 end
