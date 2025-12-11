@@ -5,7 +5,7 @@ RSpec.describe ServicesController, type: :controller do
   let(:user) { UserAccount.create!(
     name: "Kristine Pham", 
     email: "klp2157@barnard.edu", 
-    password: "password") 
+    password: "Password1!") 
   }
 
   let(:valid_attributes) do
