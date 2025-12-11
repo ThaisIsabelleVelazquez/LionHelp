@@ -5,9 +5,7 @@ class UserAccount < ActiveRecord::Base
   validate :strong_password
 
   def is_columbia_email
-    if email.blank?
-      return
-    end
+    return if email.blank?
     unless self.email.match?(/^[A-Za-z]{2,3}\d{4}@(columbia|barnard)\.edu$/)
       errors.add(:email, "must be a valid Columbia or Barnard email address")
     end

@@ -45,7 +45,11 @@ class AccountsController < ApplicationController
         session[:user_name] = user.name
         redirect_to services_path
       else
-        flash[:notice] = "Error creating account. Please try again."
+        if user.errors[:password].any?
+          flash[:notice] = "Must be a strong password (at least 8 characters, includes uppercase, lowercase, number, and special character)"
+        else
+          flash[:notice] = "Error creating account. Please try again."
+        end
         redirect_to new_account_path
       end
     end

@@ -11,14 +11,14 @@ Background:
     | Manicures | Able to do acyrlics and gel. | 65.00 | Linda Wells  |  Salon  |
   Given the following accounts exist:
     | user_id    | name          | email             | password   |
-    | 1          | Emily Burnett     | eb1234@columbia.edu    | password   |
+    | 1          | Emily Burnett     | eb1234@columbia.edu    | Password1!   |
 
   Given the following reviews exist:
     | client_id | vendor_id | vendor_name          | title      | rating | comment                                                  | reviewer | client_name |
     | 10          | 1          | Emily Burnett         | Tutoring  | 4      | Explained things clearly                            | client  | John Doe |
     | 11          | 3          | Hannah Lasso         | Furniture  | 3      | My chair had a scratch on the back.                     | client  | Kathy Lee |
   And I am on the login page
-  And I login with "eb1234@columbia.edu" and "password"
+  And I login with "eb1234@columbia.edu" and "Password1!"
 
 Scenario: Create a new service
     Given I am on the new service page
