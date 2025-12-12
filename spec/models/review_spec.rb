@@ -54,6 +54,7 @@ RSpec.describe Review, type: :model do
     it 'returns blank when client_id does not exist' do
       expect(Review.client_reviews(999)).to be_empty
     end
+    
 
     it 'returns the correct reviews for a client' do
       review4 = Review.create!(
@@ -93,6 +94,8 @@ RSpec.describe Review, type: :model do
       expect(Review.client_reviews(client1.id)).not_to include(review6)
     end
   end
+
+  
 
   describe 'validations' do
     it 'validates presence of vendor_name for vendor reviews' do
