@@ -50,3 +50,11 @@ end
 When("I click Edit for the service {string}") do |title|
   click_link "#{title.parameterize}-edit"
 end
+
+When('I select a service category {string}') do |category|
+  visit services_path(category: category)
+end
+
+
+
+

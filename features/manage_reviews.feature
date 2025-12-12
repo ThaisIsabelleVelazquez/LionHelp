@@ -110,3 +110,27 @@ Scenario: I edit a review with bad ratings
   And I press "Update"
   Then I should see "Rating is too high."
 
+Scenario: Show all reviews for John Doe and create a review as a vendor
+  # Show reviews about John Doe
+  Given I am on the show_vendor_review page for 1
+  Then I should see comments like:
+    | They were late to the appointment. |
+
+  Given I am on the show_client_review page for 1
+  Then I should see comments like:
+    | Personally delivered to me         |
+    | Sold at a really good price        |
+
+  Given I am on the new review page
+  When I select the reviewer type as "Client"     
+  And I select the user being reviewed as "John Doe"
+  And I fill in the service provided with "Haircut"
+  And I fill in the review content with "Prompt and professional!"
+  And I fill in the review rating with "5"
+  And I submit the new review
+  Then I should see the review success message
+
+  Given I am on the show_client_review page for 1
+  Then I should see comments like:
+    | Prompt and professional! |
+

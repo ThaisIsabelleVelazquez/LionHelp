@@ -13,31 +13,30 @@
         class: "form-control", 
         style: "width: 200px; display: inline-block; margin-right: 10px;" %>
 
-        <br><br>
+    <br><br>
   
     <%= select_tag :category,
-      options_for_select(['All', 'Tutoring', 'Food', 'Cleaning', 'Transportation', 'Tech Help', 'Other'], params[:category]),
-      prompt: "Filter by Category",
+      options_for_select(
+        ['All', 'Tutoring', 'Food', 'Cleaning', 'Transportation', 'Tech Help', 'Other'],
+        params[:category] || 'All'
+      ),
+      id: "category",
       class: "form-control",
       style: "width: 200px; display: inline-block; margin-right: 10px;",
       onchange: "this.form.submit();" %>
 
-   
+
     <%= select_tag :price_sort,
-      options_for_select(
-        [
-          ['Sort by Price', ''],
-          ['Price: Low → High', 'asc'],
-          ['Price: High → Low', 'desc']
-        ],
-        params[:price_sort]
-      ),
-      class: "form-control",
-      style: "width: 200px; display: inline-block;",
-      onchange: "this.form.submit();" %>
+        options_for_select([['Sort by Price', ''], ['Price: Low → High', 'asc'], ['Price: High → Low', 'desc']], params[:price_sort]),
+        class: "form-control",
+        style: "width: 200px; display: inline-block;" %>
+
+    <!-- Hidden submit button so tests can submit the form -->
+    <%= submit_tag "Filter", style: "display:none;" %>
 
   <% end %>
 </div>
+
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 30px;">
   <% @services.each do |s| %>
