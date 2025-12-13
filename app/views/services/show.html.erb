@@ -14,6 +14,10 @@
 </ul>
 <br/>
 
+<%= link_to "Request this Service", 
+            new_service_request_path(service_id: @service.id, vendor_id: @service.vendor_id), 
+            class: 'btn btn-primary' %>
+
 <h3>Reviews</h3>
 <ul class="list-group">
   <% @reviews.each do |review| %>
