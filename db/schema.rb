@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema[8.0].define(version: 2025_12_13_133317) do
   create_table "reviews", force: :cascade do |t|
-    t.integer "client_id"
     t.integer "vendor_id"
     t.text "vendor_name"
     t.text "title"
@@ -20,6 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_13_133317) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "client_id"
     t.string "reviewer"
     t.string "client_name"
   end
@@ -38,13 +38,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_13_133317) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.integer "vendor_id"
     t.string "title"
     t.text "description"
     t.decimal "price"
-    t.string "vendor_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "vendor_id"
+    t.string "vendor_name"
     t.string "category"
   end
 

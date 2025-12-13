@@ -64,5 +64,6 @@ class ServiceRequestsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       redirect_to inbox_service_requests_path, alert: "Request not found"
     end
+    
   end
   

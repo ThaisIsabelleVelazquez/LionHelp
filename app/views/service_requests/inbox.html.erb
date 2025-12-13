@@ -2,7 +2,7 @@
 
 <h3>Incoming Requests - Pending</h3>
 <% if @incoming_pending.any? %>
-  <table class="table">
+  <table id="incoming_pending" class="table">
     <thead>
       <tr>
         <th>Client</th>
@@ -18,20 +18,20 @@
           <td><%= req.service.title %></td>
           <td><%= req.message %></td>
           <td>
-            <%= link_to "Accept", update_service_request_path(req, accept: true), method: :patch, class: "btn btn-success btn-sm" %>
-            <%= link_to "Decline", update_service_request_path(req, decline: true), method: :patch, class: "btn btn-danger btn-sm" %>
+            <%= link_to "Accept", service_request_path(req, accept: true), method: :patch, class: "btn btn-success btn-sm" %>
+            <%= link_to "Decline", service_request_path(req, decline: true), method: :patch, class: "btn btn-danger btn-sm" %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <p>No pending incoming requests.</p>
+  <p id="no_incoming_pending">No pending incoming requests.</p>
 <% end %>
 
 <h3>Incoming Requests - History</h3>
 <% if @incoming_history.any? %>
-  <table class="table">
+  <table id="incoming_history" class="table">
     <thead>
       <tr>
         <th>Client</th>
@@ -52,12 +52,12 @@
     </tbody>
   </table>
 <% else %>
-  <p>No history of incoming requests.</p>
+  <p id="no_incoming_history">No history of incoming requests.</p>
 <% end %>
 
 <h3>Outgoing Requests (as Client)</h3>
 <% if @outgoing_requests.any? %>
-  <table class="table">
+  <table id="outgoing_requests" class="table">
     <thead>
       <tr>
         <th>Vendor</th>
@@ -78,5 +78,5 @@
     </tbody>
   </table>
 <% else %>
-  <p>No outgoing requests.</p>
+  <p id="no_outgoing_requests">No outgoing requests.</p>
 <% end %>
