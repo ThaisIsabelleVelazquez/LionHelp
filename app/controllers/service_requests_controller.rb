@@ -1,5 +1,6 @@
 class ServiceRequestsController < ApplicationController
     before_action :set_service_request, only: [:update]
+    before_action :require_login
   
     def new
       @service_request = ServiceRequest.new(
@@ -9,8 +10,10 @@ class ServiceRequestsController < ApplicationController
     end
   
     def create
+      client = UserAccount.find_by(name: session[:user_name])
+      
       @service_request = ServiceRequest.new(service_request_params)
-      @service_request.client = current_user
+      @service_request.client = client
       @service_request.status = "pending"
   
       if @service_request.save
@@ -22,8 +25,9 @@ class ServiceRequestsController < ApplicationController
     end
   
     def inbox
+      vendor = UserAccount.find_by(name: session[:user_name])
       @requests = ServiceRequest
-                    .where(vendor: current_user)
+                    .where(vendor: vendor)
                     .order(created_at: :desc)
     end
   
