@@ -1,0 +1,17 @@
+<h2>Inbox</h2>
+
+<% @requests.each do |req| %>
+  <div class="card mb-2">
+    <div class="card-body">
+      <p><strong>Client:</strong> <%= req.client.name %></p>
+      <p><strong>Service:</strong> <%= req.service.title %></p>
+      <p><strong>Message:</strong> <%= req.message %></p>
+      <p><strong>Status:</strong> <%= req.status %></p>
+
+      <% if req.status == "pending" %>
+        <%= button_to "Accept", service_request_path(req, accept: true), method: :patch, class: "btn btn-success" %>
+        <%= button_to "Decline", service_request_path(req, decline: true), method: :patch, class: "btn btn-danger" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

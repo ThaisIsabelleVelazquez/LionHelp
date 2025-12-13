@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_13_010126) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_13_133317) do
   create_table "reviews", force: :cascade do |t|
+    t.integer "client_id"
     t.integer "vendor_id"
     t.text "vendor_name"
     t.text "title"
@@ -19,19 +20,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_13_010126) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "client_id"
     t.string "reviewer"
     t.string "client_name"
   end
 
+  create_table "service_requests", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "vendor_id"
+    t.integer "service_id"
+    t.string "status"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_service_requests_on_client_id"
+    t.index ["service_id"], name: "index_service_requests_on_service_id"
+    t.index ["vendor_id"], name: "index_service_requests_on_vendor_id"
+  end
+
   create_table "services", force: :cascade do |t|
+    t.integer "vendor_id"
     t.string "title"
     t.text "description"
     t.decimal "price"
+    t.string "vendor_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "vendor_id"
-    t.string "vendor_name"
     t.string "category"
   end
 
@@ -43,4 +56,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_13_010126) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "service_requests", "services"
+  add_foreign_key "service_requests", "user_accounts", column: "client_id"
+  add_foreign_key "service_requests", "user_accounts", column: "vendor_id"
 end
