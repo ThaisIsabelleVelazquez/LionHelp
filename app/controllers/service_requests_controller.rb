@@ -25,11 +25,23 @@ class ServiceRequestsController < ApplicationController
     end
   
     def inbox
-      vendor = UserAccount.find_by(name: session[:user_name])
-      @requests = ServiceRequest
-                    .where(vendor: vendor)
-                    .order(created_at: :desc)
-    end
+        current_user = UserAccount.find_by(name: session[:user_name])
+    
+        # Incoming requests as vendor
+        @incoming_pending = ServiceRequest
+                              .where(vendor: current_user, status: "pending")
+                              .order(created_at: :desc)
+    
+        @incoming_history = ServiceRequest
+                              .where(vendor: current_user)
+                              .where.not(status: "pending")
+                              .order(created_at: :desc)
+    
+        # Outgoing requests as client
+        @outgoing_requests = ServiceRequest
+                               .where(client: current_user)
+                               .order(created_at: :desc)
+      end
   
     def update
       if params[:accept]
