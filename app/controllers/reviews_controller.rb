@@ -18,11 +18,8 @@ def index
 
 
   if params[:q].present?
-    query = "%#{params[:q]}%"
-    @reviews = @reviews.where(
-      "title LIKE :q OR comment LIKE :q OR client_name LIKE :q OR vendor_name LIKE :q",
-      q: query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
-    )
+    @search = @reviews.ransack( title_or_comment_or_client_name_or_vendor_name_cont: params[:q])
+    @reviews = @search.result
   end
 end
 
