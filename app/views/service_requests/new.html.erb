@@ -1,0 +1,15 @@
+<h2>Request Service: <%= @service_request.service.title if @service_request.service %></h2>
+
+<%= form_with(model: @service_request, local: true) do |f| %>
+  <div class="form-group">
+    <%= f.label :message, "Message to Vendor" %>
+    <%= f.text_area :message, class: "form-control" %>
+  </div>
+
+  <%= f.hidden_field :service_id %>
+  <%= f.hidden_field :vendor_id %>
+
+  <%= f.submit "Send Request", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "Back to Service", service_path(@service_request.service_id), class: "btn btn-secondary mt-2" %>

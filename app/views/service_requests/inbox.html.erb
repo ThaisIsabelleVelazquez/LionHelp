@@ -1,0 +1,82 @@
+<h2>Inbox</h2>
+
+<h3>Incoming Requests - Pending</h3>
+<% if @incoming_pending.any? %>
+  <table id="incoming_pending" class="table">
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Service</th>
+        <th>Message</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @incoming_pending.each do |req| %>
+        <tr>
+          <td><%= req.client.name %></td>
+          <td><%= req.service.title %></td>
+          <td><%= req.message %></td>
+          <td>
+            <%= link_to "Accept", service_request_path(req, accept: true), method: :patch, class: "btn btn-success btn-sm" %>
+            <%= link_to "Decline", service_request_path(req, decline: true), method: :patch, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p id="no_incoming_pending">No pending incoming requests.</p>
+<% end %>
+
+<h3>Incoming Requests - History</h3>
+<% if @incoming_history.any? %>
+  <table id="incoming_history" class="table">
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Service</th>
+        <th>Message</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @incoming_history.each do |req| %>
+        <tr>
+          <td><%= req.client.name %></td>
+          <td><%= req.service.title %></td>
+          <td><%= req.message %></td>
+          <td><%= req.status.capitalize %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p id="no_incoming_history">No history of incoming requests.</p>
+<% end %>
+
+<h3>Outgoing Requests (as Client)</h3>
+<% if @outgoing_requests.any? %>
+  <table id="outgoing_requests" class="table">
+    <thead>
+      <tr>
+        <th>Vendor</th>
+        <th>Service</th>
+        <th>Message</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @outgoing_requests.each do |req| %>
+        <tr>
+          <td><%= req.vendor.name %></td>
+          <td><%= req.service.title %></td>
+          <td><%= req.message %></td>
+          <td><%= req.status.capitalize %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p id="no_outgoing_requests">No outgoing requests.</p>
+<% end %>
