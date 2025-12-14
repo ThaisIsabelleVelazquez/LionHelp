@@ -21,7 +21,7 @@ def index
     query = "%#{params[:q]}%"
     @reviews = @reviews.where(
       "title LIKE :q OR comment LIKE :q OR client_name LIKE :q OR vendor_name LIKE :q",
-      q: query
+      q: query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
     )
   end
 end
