@@ -7,6 +7,12 @@ def index
  
   if params[:filter] == "about_me_vendor" && session[:user_name].present?
     @reviews = @reviews.where(reviewer: "client", vendor_name: session[:user_name])
+
+
+  elsif params[:filter] == "about_me_client" && session[:user_name].present?
+    @reviews = @reviews.where(reviewer: "vendor", client_name: session[:user_name])
+
+
   elsif params[:filter] == "written_by_me" && session[:user_name].present?
     @reviews = @reviews.where(client_name: session[:user_name], reviewer: "client")
                        .or(@reviews.where(vendor_name: session[:user_name], reviewer: "vendor"))
