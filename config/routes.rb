@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   
 
-  resources :useraccounts, only: [:show]   
-  resources :users, only: [:show]
+  get '/profile', to: 'accounts#profile', as: 'profile'
+
 
 
   resources :reviews
