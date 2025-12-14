@@ -3,16 +3,16 @@
 
 # --- Create User Accounts ---
 accounts = [
-    { user_id: 1, name: 'John Doe', email: 'jd1234@columbia.edu' , password: 'password' },
-    { user_id: 2, name: 'Kathy Lee', email: 'kl1234@columbia.edu' , password: 'password' },
-    { user_id: 3, name: 'Hannah Lasso', email: 'hl1234@barnard.edu' , password: 'password' },
-    { user_id: 4, name: 'Barbara Reddington', email: 'br1234@barnard.edu' , password: 'password' },
-    { user_id: 5, name: 'Janine Abbott', email: 'ja1234@barnard.edu' , password: 'password' },
-    { user_id: 6, name: 'Sam Patel', email: 'sp1234@columbia.edu' , password: 'password' },
-    { user_id: 7, name: 'Emily Chen', email: 'ec1234@columbia.edu' , password: 'password' },
-    { user_id: 8, name: 'Lina Morales', email: 'lm1234@columbia.edu' , password: 'password' },
-    { user_id: 9, name: 'Maya Brooks', email: 'mb1234@columbia.edu' , password: 'password' },
-    { user_id: 10, name: 'Chris Ramos', email: 'cr1234@columbia.edu' , password: 'password' }
+    { user_id: 1, name: 'John Doe', email: 'jd1234@columbia.edu' , password: 'Password!@1' },
+    { user_id: 2, name: 'Kathy Lee', email: 'kl1234@columbia.edu' , password: 'Password!@1' },
+    { user_id: 3, name: 'Hannah Lasso', email: 'hl1234@barnard.edu' , password: 'Password!@1' },
+    { user_id: 4, name: 'Barbara Reddington', email: 'br1234@barnard.edu' , password: 'Password!@1' },
+    { user_id: 5, name: 'Janine Abbott', email: 'ja1234@barnard.edu' , password: 'Password!@1' },
+    { user_id: 6, name: 'Sam Patel', email: 'sp1234@columbia.edu' , password: 'Password!@1' },
+    { user_id: 7, name: 'Emily Chen', email: 'ec1234@columbia.edu' , password: 'Password!@1' },
+    { user_id: 8, name: 'Lina Morales', email: 'lm1234@columbia.edu' , password: 'Password!@1' },
+    { user_id: 9, name: 'Maya Brooks', email: 'mb1234@columbia.edu' , password: 'Password!@1' },
+    { user_id: 10, name: 'Chris Ramos', email: 'cr1234@columbia.edu' , password: 'Password!@1' }
 ]
 UserAccount.delete_all
 accounts.each do |account|
