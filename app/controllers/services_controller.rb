@@ -43,7 +43,7 @@ class ServicesController < ApplicationController
 
   def show
     @service = Service.find(params[:id])
-    @reviews = Review.where(reviewer: "client", vendor_name: @service.vendor_name)
+    @reviews = Review.where(reviewer: "client", vendor_name: @service.vendor_name, title: @service.title)
     puts @reviews
   end
 
