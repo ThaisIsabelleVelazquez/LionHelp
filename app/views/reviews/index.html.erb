@@ -59,12 +59,15 @@
 
   <div class="button-row">
     <%= form_with url: reviews_path, method: :get, local: true do %>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <%= text_field_tag :q,
+          params[:q],
+          placeholder: "Search reviews...",
+          class: "form-control",
+          style: "width: 260px;" %>
 
-      <%= text_field_tag :q,
-        params[:q],
-        placeholder: "Search reviews...",
-        class: "form-control",
-        style: "width: 260px;" %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      </div>
     <% end %>
   </div>
 
@@ -74,7 +77,8 @@
         options_for_select(
           [
             ['All Reviews', nil],
-            ['Reviews About Me (Vendor)', 'about_me_vendor'],
+            ['Reviews About Me (As Vendor)', 'about_me_vendor'],
+            ['Reviews About Me (As Client)', 'about_me_client'],
             ['Reviews I Wrote', 'written_by_me']
           ],
           params[:filter]
