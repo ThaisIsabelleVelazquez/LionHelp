@@ -1,18 +1,13 @@
 class ReviewsController < ApplicationController
   before_action :require_login
 
-def index
+  def index
   @reviews = Review.all
 
- 
   if params[:filter] == "about_me_vendor" && session[:user_name].present?
     @reviews = @reviews.where(reviewer: "client", vendor_name: session[:user_name])
-
-
   elsif params[:filter] == "about_me_client" && session[:user_name].present?
     @reviews = @reviews.where(reviewer: "vendor", client_name: session[:user_name])
-
-
   elsif params[:filter] == "written_by_me" && session[:user_name].present?
     @reviews = @reviews.where(client_name: session[:user_name], reviewer: "client")
                        .or(@reviews.where(vendor_name: session[:user_name], reviewer: "vendor"))
@@ -22,10 +17,12 @@ def index
     @reviews = @reviews.where(reviewer: "client")
   end
 
-
   if params[:q].present?
-    @search = @reviews.ransack( title_or_comment_or_client_name_or_vendor_name_cont: params[:q])
-    @reviews = @search.result
+    query = "%#{params[:q]}%"
+    @reviews = @reviews.where(
+      "title LIKE :q OR comment LIKE :q OR vendor_name LIKE :q",
+      q: query
+    )
   end
 end
 
