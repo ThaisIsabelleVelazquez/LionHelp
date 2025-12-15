@@ -36,3 +36,24 @@ end
 When('I click Logout') do
   click_link 'Logout'
 end
+
+When('I visit the profile page for {string}') do |name|
+  user = UserAccount.find_by(name: name)
+  visit profile_path
+end
+
+Then('I should see my email {string}') do |name|
+  expect(page).to have_content(name)
+end
+
+Then('I should see my service {string}') do |service_title|
+  expect(page).to have_content(service_title)
+end
+
+Then('I should see a review as vendor {string}') do |review_comment|
+  expect(page).to have_content(review_comment)
+end
+
+Then('I should see a review as client {string}') do |review_comment|
+  expect(page).to have_content(review_comment)
+end

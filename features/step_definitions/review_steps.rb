@@ -1,8 +1,22 @@
 Given(/the following reviews exist/) do |reviews_table|
-    reviews_table.hashes.each do |review|
-        Review.create review
-    end
+  reviews_table.hashes.each do |review|
+    Review.create(
+      client_id: review['client_id'].to_i,
+      vendor_id: review['vendor_id'].to_i,
+      vendor_name: review['vendor_name'],
+      title: review['title'],
+      rating: review['rating'].to_i,
+      comment: review['comment'],
+      reviewer: review['reviewer'],
+      client_name: review['client_name']
+    )
+    
+  end
+  puts "Reviews in DB: #{Review.count}"
 end
+
+
+
 
 Given('I am on the review home page') do
     visit reviews_path
@@ -110,4 +124,47 @@ end
 
 Then(/^I should see the review success message$/) do
   expect(page).to have_content("Review posted successfully!")
+end
+
+# When('I select a review category {string}') do |option|
+#   select option, from: 'filter'
+# end
+
+# When(/^I select "([^"]+)" from the filter dropdown$/) do |option_text|
+#   find('select#filter').find('option', text: option_text).select_option
+# end
+
+When('I select a review category {string}') do |category|
+  filter_param = case category
+                 when "All Reviews"
+                   nil
+                 when "Reviews About Me (As Vendor)"
+                   "about_me_vendor"
+                 when "Reviews About Me (As Client)"
+                   "about_me_client"
+                 when "Reviews I Wrote"
+                   "written_by_me"
+                 else
+                   raise "Unknown category: #{category}"
+                 end
+
+  visit reviews_path(filter: filter_param)
+end
+
+
+When('I edit the review with comment {string}') do |comment|
+  review = Review.find_by(comment: comment)
+  click_link "review-#{review.id}-edit"
+end
+
+# When('I fill in the review content with {string}') do |content|
+#   fill_in 'review_comment', with: content
+# end
+
+# When('I fill in the review rating with {string}') do |rating|
+#   fill_in 'review_rating', with: rating
+# end
+
+When('I submit the updated review') do
+  click_button 'Update'
 end

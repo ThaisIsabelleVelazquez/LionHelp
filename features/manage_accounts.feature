@@ -8,6 +8,20 @@ Background:
     | user_id    | name          | email             | password   |
     | 0          | Kathy Lee     | kl1234@barnard.edu   | Password1!   |
     | 1          | John Doe      | jd1234@columbia.edu    | Password1!   |
+  
+  Given the following services exist:
+    | title          | description             | category   | price | vendor_name |
+    | Math Tutoring  | Help with math          | Tutoring   | 50    | John Doe    |
+    | Grocery Pickup | Pickup groceries        | Food       | 20    | Jane Smith  |
+    | Dorm Cleaning  | Clean dorm rooms        | Cleaning   | 30    | Mike Lee    |
+      
+  Given the following reviews exist:
+    | client_id | vendor_id | vendor_name   | title    | rating | comment                  | reviewer | client_name |
+    | 1         | 2         | Hannah Lasso | Furniture | 4     | Prompt and professional! | client  | John Doe    |
+    | 2         | 1         | John Doe     | Haircut   | 5     | Excellent haircut!       | vendor  | Hannah Lasso|
+  
+  
+  
   And I am on the login page
 
 Scenario: I have an account and I successfully login
@@ -111,3 +125,13 @@ Scenario: I create an account with a password missing special characters
   And I sign up with the following: name as "Kristine", email as "kp1234@columbia.edu", password as "Password1"
   Then I should see "Must be a strong password (at least 8 characters, includes uppercase, lowercase, number, and special character)"
   Then I should be on signup page
+
+
+Scenario: View my own profile
+  When I visit the profile page for "John Doe"
+  When I login with "jd1234@columbia.edu" and "Password1!"
+  When I visit the profile page for "John Doe"
+  Then I should see my email "Email: jd1234@columbia.edu"
+  And I should see my service "Math Tutoring"
+  And I should see "Vendor Rating"
+  And I should see "Client Rating"
