@@ -14,4 +14,9 @@ Rails.application.routes.draw do
   post '/login', to: 'accounts#login', as: 'login'
   get '/logout', to: 'accounts#logout', as: 'logout'
   root 'accounts#index'
+  resources :service_requests, only: [:new, :create, :update] do
+    collection do
+      get :inbox
+    end
+  end
 end
