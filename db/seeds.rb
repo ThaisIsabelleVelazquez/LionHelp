@@ -50,11 +50,7 @@ reviews = [
     { client_id: 2, vendor_id: 3, vendor_name: 'Hannah Lasso', title: 'Furniture Pickup', rating: 3, comment: 'My chair had a scratch on the back.', reviewer: "client", client_name: "Kathy Lee" },
     { client_id: 5, vendor_id: 3, vendor_name: 'Hannah Lasso', title: 'Furniture Pickup', rating: 5, comment: 'Was really friendly.', reviewer: "client", client_name: "Janine Abbott" },
     { client_id: 4, vendor_id: 3, vendor_name: 'Hannah Lasso', title: 'Furniture Pickup', rating: 5, comment: 'Sold at a really good price', reviewer: "client", client_name: "Barbara Reddington" },
-    
-
-    { client_id: 1, vendor_id: 4, vendor_name: 'Barbara Reddington', title: 'Manicure', rating: 1, comment: 'The nail design was not like the picture I showed.', reviewer: "client", client_name: "John Doe" },
-    { client_id: 4, vendor_id: 1, vendor_name: 'John Doe', title: 'Haircut', rating: 2, comment: 'They were late to the appointment.', reviewer: "vendor", client_name: "Barbara Reddington" },
-    { client_id: 3, vendor_id: 4, vendor_name: 'Barbara Reddington', title: 'Manicure', rating: 1, comment: 'They were so rude to me.', reviewer: "client", client_name: "Hannah Lasso" },
+  
 
     { client_id: 1, vendor_id: 5, vendor_name: 'Janine Abbott', title: 'Dorm Cleaning', rating: 5, comment: 'My room was super clean when I got back.', reviewer: "client", client_name: "John Doe" },
     { client_id: 4, vendor_id: 5, vendor_name: 'Janine Abbott', title: 'Dorm Cleaning', rating: 5, comment: 'She left behind a scented candle that smelled really good.', reviewer: "client", client_name: "Barbara Reddington" },
@@ -121,20 +117,48 @@ reviews = [
     { client_id: 9, vendor_id: 1, vendor_name: 'John Doe', title: 'Manicures', rating: 4, comment: "Decent manicure, but the session ran a little long and the shape wasn't exactly what I asked for.", reviewer: "client", client_name: "Maya Brooks" },
     { client_id: 3, vendor_id: 1, vendor_name: 'John Doe', title: 'Manicures', rating: 3, comment: "The final result was okay, just not perfect.", reviewer: "client", client_name: "Hannah Lasso" },
 
+    { client_id: 1, vendor_id: 2, vendor_name: 'Kathy Lee', title: 'Meal Swipes', rating: 5, comment: "Great client to work with.", reviewer: "vendor", client_name: "John Doe" },
+    { client_id: 1, vendor_id: 5, vendor_name: 'Janine Abbott', title: 'Dorm Cleaning', rating: 5, comment: "Very polite and easy to coordinate with.", reviewer: "vendor", client_name: "John Doe" },
+    { client_id: 1, vendor_id: 3, vendor_name: 'Hannah Lasso', title: 'Furniture Pickup', rating: 4, comment: "They were organized, responsive, and made the process straightforward.", reviewer: "vendor", client_name: "John Doe" },
+
+    { client_id: 2, vendor_id: 6, vendor_name: 'Sam Patel', title: 'Print Station Helper', rating: 4, comment: "Overall a good client to work with.", reviewer: "vendor", client_name: "Kathy Lee" },
+    { client_id: 2, vendor_id: 7, vendor_name: 'Emily Chen', title: 'Resume Review & Interview Prep', rating: 3, comment: "Decent experience. The client was polite, but coordination took a bit longer than expected.", reviewer: "vendor", client_name: "Kathy Lee" },
+    { client_id: 2, vendor_id: 8, vendor_name: 'Line Morales', title: 'Bike Rentals Around Campus', rating: 4, comment: "The client was respectful and responsive, and the service was completed without problems.", reviewer: "vendor", client_name: "Kathy Lee" },
+
+    { client_id: 3, vendor_id: 9, vendor_name: 'Maya Brooks', title: 'Laundry Folding Service', rating: 2, comment: "Would prefer clearer communication in the future.", reviewer: "vendor", client_name: "Hannah Lasso" },
+    { client_id: 3, vendor_id: 10, vendor_name: 'Chris Ramos', title: 'Headshots for LinkedIn', rating: 1, comment: "The client was unresponsive at key points and caused delays that could have been avoided with better coordination.", reviewer: "vendor", client_name: "Hannah Lasso" },
+    { client_id: 3, vendor_id: 1, vendor_name: 'John Doe', title: 'Manicures', rating: 2, comment: "Expectations were unclear, which led to some frustration during the process.", reviewer: "vendor", client_name: "Hannah Lasso" },
+
+    { client_id: 4, vendor_id: 1, vendor_name: 'John Doe', title: 'Moving Out Services', rating: 4, comment: "everything went smoothly from start to finish.", reviewer: "vendor", client_name: "Barbara Reddington" },
+    { client_id: 4, vendor_id: 2, vendor_name: 'Kathy Lee', title: 'Meal Swipes', rating: 5, comment: "Would be happy to work with them again.", reviewer: "vendor", client_name: "Barbara Reddington" },
+    { client_id: 4, vendor_id: 5, vendor_name: 'Janine Abbott', title: 'Dorm Cleaning', rating: 5, comment: "The interaction was efficient and professional throughout.", reviewer: "vendor", client_name: "Barbara Reddington" },
+
+    { client_id: 5, vendor_id: 4, vendor_name: 'Barbara Reddington', title: 'Home-Made Baked Goods', rating: 4, comment: "The client was friendly and approachable.", reviewer: "vendor", client_name: "Janine Abbott" },
+    { client_id: 5, vendor_id: 1, vendor_name: 'John Doe', title: 'Tutoring – COMS W1004', rating: 3, comment: "The client was polite but somewhat reserved, which made it harder to gauge expectations at times.", reviewer: "vendor", client_name: "Janine Abbott" },
+    { client_id: 5, vendor_id: 3, vendor_name: 'Hannah Lasso', title: 'Furniture Pickup', rating: 4, comment: "Easygoing and respectful personality overall.", reviewer: "vendor", client_name: "Janine Abbott" },
+
+    { client_id: 6, vendor_id: 7, vendor_name: 'Emily Chen', title: 'Resume Review & Interview Prep', rating: 1, comment: "The client came across as dismissive and difficult to communicate with.", reviewer: "vendor", client_name: "Sam Patel" },
+    { client_id: 6, vendor_id: 8, vendor_name: 'Lina Morales', title: 'Bike Rentals Around Campus', rating: 2, comment: "Challenging personality to work with.", reviewer: "vendor", client_name: "Sam Patel" },
+    { client_id: 6, vendor_id: 9, vendor_name: 'Maya Brooks', title: 'Laundry Folding Service', rating: 1, comment: "The client was uncooperative at times and seemed easily frustrated.", reviewer: "vendor", client_name: "Sam Patel" },
+
+    { client_id: 7, vendor_id: 6, vendor_name: 'Sam Patel', title: 'Print Station Helper', rating: 5, comment: "Fantastic client to work with.", reviewer: "vendor", client_name: "Emily Chen" },
+    { client_id: 7, vendor_id: 10, vendor_name: 'Chris Ramos', title: 'Headshots for LinkedIn', rating: 5, comment: "Great experience overall.", reviewer: "vendor", client_name: "Emily Chen" },
+    { client_id: 7, vendor_id: 1, vendor_name: 'John Doe', title: 'Manicures', rating: 5, comment: "Clear communication, prompt follow-through, and a genuinely kind demeanor.", reviewer: "vendor", client_name: "Emily Chen" },
+
+    { client_id: 8, vendor_id: 5, vendor_name: 'Janine Abbott', title: 'Dorm Cleaning', rating: 3, comment: "Pretty average experience.", reviewer: "vendor", client_name: "Lina Morales" },
+    { client_id: 8, vendor_id: 2, vendor_name: 'Kathy Lee', title: 'Meal Swipes', rating: 3, comment: "The client was chill overall.", reviewer: "vendor", client_name: "Lina Morales" },
+    { client_id: 8, vendor_id: 1, vendor_name: 'John Doe', title: 'Moving Out Services', rating: 2, comment: "After some back and forth, everything worked out fine.", reviewer: "vendor", client_name: "Lina Morales" },
+
+    { client_id: 9, vendor_id: 4, vendor_name: 'Barbara Reddington', title: 'Home-Made Baked Goods', rating: 1, comment: "The client was pretty unresponsive and hard to work with.", reviewer: "vendor", client_name: "Maya Brooks" },
+    { client_id: 9, vendor_id: 1, vendor_name: 'John Doe', title: 'Tutoring – COMS W1004', rating: 1, comment: "Definitely not a smooth interaction.", reviewer: "vendor", client_name: "Maya Brooks" },
+    { client_id: 9, vendor_id: 3, vendor_name: 'Hannah Lasso', title: 'Furniture Pickup', rating: 1, comment: "Communication was really spotty and plans kept changing last minute.", reviewer: "vendor", client_name: "Maya Brooks" },
+
+    { client_id: 10, vendor_id: 7, vendor_name: 'Emily Chen', title: 'Resume Review & Interview Prep', rating: 4, comment: "The client was engaged during my resume review session.", reviewer: "vendor", client_name: "Chris Ramos" },
+    { client_id: 10, vendor_id: 8, vendor_name: 'Lina Morales', title: 'Bike Rentals Around Campus', rating: 5, comment: "Was able to maintain the bike rental in good condition for a week.", reviewer: "vendor", client_name: "Chris Ramos" },
+    { client_id: 10, vendor_id: 9, vendor_name: 'Maya Brooks', title: 'Laundry Folding Service', rating: 4, comment: "Easy to coordinate with and communicated clearly about expectations for clothes.", reviewer: "vendor", client_name: "Chris Ramos" },
+
 ]
 
-    # accounts = [
-    #     { user_id: 1, name: 'John Doe', email: 'jd1234@columbia.edu' , password: 'Password1!' },
-    #     { user_id: 2, name: 'Kathy Lee', email: 'kl1234@columbia.edu' , password: 'Password1!' },
-    #     { user_id: 3, name: 'Hannah Lasso', email: 'hl1234@barnard.edu' , password: 'Password1!' },
-    #     { user_id: 4, name: 'Barbara Reddington', email: 'br1234@barnard.edu' , password: 'Password1!' },
-    #     { user_id: 5, name: 'Janine Abbott', email: 'ja1234@barnard.edu' , password: 'Password1!' },
-    #     { user_id: 6, name: 'Sam Patel', email: 'sp1234@columbia.edu' , password: 'Password1!' },
-    #     { user_id: 7, name: 'Emily Chen', email: 'ec1234@columbia.edu' , password: 'Password1!' },
-    #     { user_id: 8, name: 'Lina Morales', email: 'lm1234@columbia.edu' , password: 'Password1!' },
-    #     { user_id: 9, name: 'Maya Brooks', email: 'mb1234@columbia.edu' , password: 'Password1!' },
-    #     { user_id: 10, name: 'Chris Ramos', email: 'cr1234@columbia.edu' , password: 'Password1!' }
-    # ]
 
 Review.delete_all
 reviews.each do |review|
