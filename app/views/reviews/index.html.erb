@@ -51,8 +51,10 @@
     <% when "written_by_me" %>
       Reviews I Wrote
     <% when "about_me_vendor" %>
-      Reviews About Me
-    <% else %>
+      Reviews About Me As A Vendor
+    <% when "about_me_client" %>
+      Reviews About Me As A Client
+      <% else %>
       All Reviews
     <% end %>
   </h2>
@@ -73,19 +75,20 @@
 
   <div class="button-row">
     <%= form_with url: reviews_path, method: :get, local: true do %>
-      <%= select_tag :filter,
-        options_for_select(
-          [
-            ['All Reviews', nil],
-            ['Reviews About Me (As Vendor)', 'about_me_vendor'],
-            ['Reviews About Me (As Client)', 'about_me_client'],
-            ['Reviews I Wrote', 'written_by_me']
-          ],
-          params[:filter]
-        ),
-        class: 'form-control',
-        style: 'width: 260px;',
-        onchange: 'this.form.submit();' %>
+     <%= select_tag :filter,
+  options_for_select(
+    [
+      ['All Reviews', 'all'],
+      ['Reviews About Me (As Vendor)', 'about_me_vendor'],
+      ['Reviews About Me (As Client)', 'about_me_client'],
+      ['Reviews I Wrote', 'written_by_me']
+    ],
+    params[:filter] || 'all'
+  ),
+  id: 'filter',
+  class: 'form-control',
+  style: 'width: 260px;',
+  onchange: 'this.form.submit();' %>
     <% end %>
 
     <%= link_to 'Write a New Review',
