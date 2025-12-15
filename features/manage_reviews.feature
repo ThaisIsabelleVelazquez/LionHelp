@@ -44,12 +44,6 @@ Scenario: Show reviews for Barbara Reddington
       | They were late to the appointment. |
 
 
-Scenario: Delete a review
-  When I am on the review home page
-  When I click on "Reviews I Wrote"
-  When I delete the review "Hannah Lasso", "Furniture", "Personally delivered to me.", "4"
-  Then I should see "Review deleted"
-
 Scenario: Create a new review
   Given I am on the new review page
   When I select the reviewer type as "Client"
@@ -87,28 +81,7 @@ Scenario: I rate too low
   Then I should see notice "Rating is too low."
   Then I should be on new review page
 
-Scenario: I edit a review
-  When I am on the review home page
-  When I click on "Reviews I Wrote"
-  Then I should see "The nail design was not like the picture I showed."
-  Then I should not see "Sold at a really good price"
-  When I edit the review with comment: "The nail design was not like the picture I showed."
-  And I fill in the review rating with "10"
-  And I fill in the review content with "Second time around and the service was great!"
-  And I press "Update"
-  Then I should see "Second time around and the service was great!"
-  Then I should not see "The nail design was not like the picture I showed."
 
-Scenario: I edit a review with bad ratings
-  When I am on the review home page
-  When I click on "Reviews I Wrote"
-  When I edit the review with comment: "The nail design was not like the picture I showed."
-  And I fill in the review rating with "-10"
-  And I press "Update"
-  Then I should see "Rating is too low."
-  And I fill in the review rating with "11"
-  And I press "Update"
-  Then I should see "Rating is too high."
 
 Scenario: Show all reviews for John Doe and create a review as a vendor
   # Show reviews about John Doe

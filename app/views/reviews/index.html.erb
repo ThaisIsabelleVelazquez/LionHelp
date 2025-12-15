@@ -10,6 +10,10 @@
 }
 .centered .button-row {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 .centered .review-list {
   width: 100%;
@@ -27,7 +31,7 @@
   text-align: left;
   display: flex;
   justify-content: space-between;
-  align-items: center;  /* centers Delete button vertically */
+  align-items: center;
 }
 .centered .review-details {
   flex: 1 1 auto;
@@ -36,51 +40,91 @@
   margin-left: 16px;
 }
 .centered .btn {
-  margin-right: 8px;
   margin-bottom: 6px;
 }
 </style>
 
 <div class="centered">
+
   <h2>
-    <% if params[:filter] == "written_by_me" %>
+    <% case params[:filter] %>
+    <% when "written_by_me" %>
       Reviews I Wrote
-    <% else %>
-      Reviews About Me
+    <% when "about_me_vendor" %>
+      Reviews About Me As A Vendor
+    <% when "about_me_client" %>
+      Reviews About Me As A Client
+      <% else %>
+      All Reviews
     <% end %>
   </h2>
 
-<div class="button-row">
-  <%= link_to 'Reviews About Me (Vendor)', reviews_path(filter: 'about_me_vendor'), class: 'btn btn-primary' %>
-  <%= link_to 'Reviews I Wrote', reviews_path(filter: 'written_by_me'), class: 'btn btn-primary' %>
-  <%= link_to 'Write a New Review', new_review_path, class: 'btn btn-primary' %>
-</div>
+  <div class="button-row">
+    <%= form_with url: reviews_path, method: :get, local: true do %>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <%= text_field_tag :q,
+          params[:q],
+          placeholder: "Search reviews...",
+          class: "form-control",
+          style: "width: 260px;" %>
 
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
 
+  <div class="button-row">
+    <%= form_with url: reviews_path, method: :get, local: true do %>
+     <%= select_tag :filter,
+  options_for_select(
+    [
+      ['All Reviews', 'all'],
+      ['Reviews About Me (As Vendor)', 'about_me_vendor'],
+      ['Reviews About Me (As Client)', 'about_me_client'],
+      ['Reviews I Wrote', 'written_by_me']
+    ],
+    params[:filter] || 'all'
+  ),
+  id: 'filter',
+  class: 'form-control',
+  style: 'width: 260px;',
+  onchange: 'this.form.submit();' %>
+    <% end %>
+
+    <%= link_to 'Write a New Review',
+      new_review_path,
+      class: 'btn btn-primary' %>
+  </div>
 
   <ul class="review-list">
     <% @reviews.each do |review| %>
       <li class="review-card" id="review_<%= review.id %>">
+
         <div class="review-details">
           <strong>Vendor Name:</strong> <%= review.vendor_name %><br>
           <strong>Service:</strong> <%= review.title %><br>
           <strong>Rating:</strong> <%= review.rating %><br>
           <strong>Comment:</strong> <%= review.comment %>
         </div>
+
         <% if params[:filter] == "written_by_me" %>
-          <%= link_to 'Edit', edit_review_path(review),
-          class: 'btn btn-secondary',
-          id: "review-#{review.id}-edit",
-          style: "margin-right: 0px;" %>
+          <%= link_to 'Edit',
+            edit_review_path(review),
+            class: 'btn btn-secondary',
+            id: "review-#{review.id}-edit" %>
+
           <div class="delete-btn-box">
-            <%= link_to 'Delete', review_path(review),
-                  method: :delete,
-                  id: "review-#{review.id}-delete",
-                  data: { confirm: 'Are you sure you want to delete this review?' },
-                  class: 'btn btn-danger' %>
+            <%= link_to 'Delete',
+              review_path(review),
+              method: :delete,
+              data: { confirm: 'Are you sure you want to delete this review?' },
+              class: 'btn btn-danger',
+              id: "review-#{review.id}-delete" %>
           </div>
         <% end %>
+
       </li>
     <% end %>
   </ul>
+
 </div>

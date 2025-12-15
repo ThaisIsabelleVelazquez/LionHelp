@@ -1,0 +1,28 @@
+<div style="text-align: center; max-width: 800px; margin: 0 auto;">
+  <h1> My Profile</h1>
+
+  <p>Email: <%= @user.email %></p>
+
+  <h2>Current Services Offered</h2>
+  <% @services.each do |service| %>
+    <p><%= service.title %></p>
+  <% end %>
+
+
+<h2>Vendor Rating</h2>
+<p>
+  <%= @vendor_average_rating.zero? ? "No ratings yet" : "#{@vendor_average_rating} / 5" %>
+</p>
+
+<h2>Client Rating</h2>
+<p>
+  <%= @client_average_rating.zero? ? "No ratings yet" : "#{@client_average_rating} / 5" %>
+</p>
+
+
+  <div style="margin-top: 40px;">
+    <%= link_to 'Logout', logout_path, 
+          class: 'btn btn-danger', 
+          style: 'padding: 10px 20px; font-size: 18px;' %>
+  </div>
+</div>
