@@ -1,37 +1,36 @@
 class AccountsController < ApplicationController
   
-  def profile
+def profile
+  @user = UserAccount.find_by(id: session[:user_id])
 
-    @user = UserAccount.find_by(id: session[:user_id])
-    unless @user
-      redirect_to accounts_path, notice: "You must be logged in."
-      return
-    end
-
-    @services = Service.where(vendor_name: @user.name)
-
-    vendor_reviews = Review.where("LOWER(vendor_name) = ?", @user.name.downcase.strip)
-                           .where(reviewer: 'client')
-                           .where.not(rating: nil)
-
-
-    service_averages = vendor_reviews.group_by(&:title).map do |title, reviews|
-      reviews.sum { |r| r.rating.to_f } / reviews.size
-    end
-
-    @vendor_average_rating = service_averages.any? ? (service_averages.sum / service_averages.size) : 0
-
-
-    client_reviews = Review.where("LOWER(client_name) = ?", @user.name.downcase.strip)
-                           .where(reviewer: 'vendor')
-                           .where.not(rating: nil)
-
-    @client_average_rating = if client_reviews.any?
-                               client_reviews.sum { |r| r.rating.to_f } / client_reviews.size
-                             else
-                               0
-                             end
+  unless @user
+    redirect_to accounts_path, notice: "You must be logged in."
+    return
   end
+
+  @services = Service.where(vendor_name: @user.name)
+
+  @vendor_reviews = Review
+    .where("LOWER(vendor_name) = ?", @user.name.downcase.strip)
+    .where(reviewer: 'client')
+    .where.not(rating: nil)
+
+  @vendor_average_rating =
+    @vendor_reviews.any? ?
+      (@vendor_reviews.sum { |r| r.rating.to_f } / @vendor_reviews.size).round(2) :
+      0
+
+
+  @client_reviews = Review
+    .where("LOWER(client_name) = ?", @user.name.downcase.strip)
+    .where(reviewer: 'vendor')
+    .where.not(rating: nil)
+
+  @client_average_rating =
+    @client_reviews.any? ?
+      (@client_reviews.sum { |r| r.rating.to_f } / @client_reviews.size).round(2) :
+      0
+end
 
   
   def index

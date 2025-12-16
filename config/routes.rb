@@ -3,8 +3,7 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'accounts#profile', as: 'profile'
 
-
-
+  resources :useraccounts, only: [:show]
   resources :reviews
   get '/vendor_reviews/:vendor_id', to: 'reviews#show_vendor_reviews', as: 'vendor_reviews'
   get '/client_reviews/:client_id', to: 'reviews#show_client_reviews', as: 'client_reviews'
