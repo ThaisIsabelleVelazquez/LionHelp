@@ -14,11 +14,15 @@ class ServiceRequestsController < ApplicationController
       
       @service_request = ServiceRequest.new(service_request_params)
       @service_request.client = client
+      @service_request.vendor = UserAccount.find_by(user_id: service_request_params[:vendor_id])
+      
       @service_request.status = "pending"
   
       if @service_request.save
         redirect_to inbox_service_requests_path, notice: "Request sent!"
       else
+        # raise @service_request.errors.full_messages.join(", ")
+        # puts "HELLO"
         flash.now[:alert] = "Unable to send request."
         render :new
       end
