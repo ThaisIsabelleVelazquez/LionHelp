@@ -5,15 +5,18 @@ Feature: Using the app with an account
 
 Background:
   Given the following accounts exist:
-    | user_id    | name          | email             | password   |
-    | 0          | Kathy Lee     | kl1234@barnard.edu   | Password1!   |
+    | user_id    | name          | email                  | password   |
+    | 0          | Kathy Lee     | kl1234@barnard.edu     | Password1!   |
     | 1          | John Doe      | jd1234@columbia.edu    | Password1!   |
+    | 2          | Lina Morales  | lm1234@columbia.edu    | Password1!   |
+    
   
   Given the following services exist:
     | title          | description             | category   | price | vendor_name |
     | Math Tutoring  | Help with math          | Tutoring   | 50    | John Doe    |
     | Grocery Pickup | Pickup groceries        | Food       | 20    | Jane Smith  |
     | Dorm Cleaning  | Clean dorm rooms        | Cleaning   | 30    | Mike Lee    |
+    | Dorm Cleaning  | Clean EC dorm rooms        | Cleaning   | 30    | Lina Morales |
       
   Given the following reviews exist:
     | client_id | vendor_id | vendor_name   | title    | rating | comment                  | reviewer | client_name |
@@ -133,5 +136,12 @@ Scenario: View my own profile
   When I visit the profile page for "John Doe"
   Then I should see my email "Email: jd1234@columbia.edu"
   And I should see my service "Math Tutoring"
+  And I should see "Vendor Rating"
+  And I should see "Client Rating"
+
+
+Scenario: View a vendor's profile
+  When I visit the profile page of vendor "Lina Morales"
+  And I should see the vendor service "Dorm Cleaning"
   And I should see "Vendor Rating"
   And I should see "Client Rating"
