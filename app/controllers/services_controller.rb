@@ -36,6 +36,7 @@ end
   def create
     @service = Service.new(service_params)
     if @service.save
+      Service.detect_and_add_category!(@service.category)
       flash[:notice] = "Service created successfully!"
       redirect_to service_path(@service)
     else
@@ -70,6 +71,7 @@ end
       flash.now[:warning] = "Price is negative."
       render :edit
     elsif @service.update(service_params)
+      Service.detect_and_add_category!(@service.category)
       flash[:notice] = "#{@service.title} was successfully updated."
       redirect_to service_path(@service)
     else

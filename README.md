@@ -8,9 +8,6 @@
 - Emily Burnett (eb3425)
 - Thais Velazquez (tiv2101)
 - Mst Nayma (mzn2002)
-
-## Heroku Deployment [TODO]
-- Access our deployment through this link
   
 ## To Run Locally
 1. Make sure you have the following installed:
@@ -45,10 +42,14 @@ bundle exec rackup --port <PORT_NUM>
 ## Available Routes
 ### Login Feature
 The root page `/` is the login page. To login, use credientials that already exist in our UserAccount database. Otherwise, create a new account with a Columbia/Barnard email that doesn't already exist by 1) pressing "Create an Account" button on the home page, or 2) going to `/new`
+- To create an account, passwords must meet strong requirements: at least 8 characters, including uppercase, lowercase, number, and special character.
+- Users cannot create an account unless their password satisfies all strength rules.
 
 ### Service Feature
 - To view a specific service based on its id number: `/services/{service_id}`
 - To create a new service: `/services/new`
+- Users can now type custom service categories when creating or editing a service.
+- New categories become official and appear in dropdowns automatically after being used three times.
 
 ### Review Feature
 - To view all reviews in the database: `/reviews`

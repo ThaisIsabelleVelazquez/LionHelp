@@ -17,7 +17,7 @@
   
     <%= select_tag :category,
       options_for_select(
-        ['All', 'Tutoring', 'Food', 'Cleaning', 'Transportation', 'Tech Help', 'Other'],
+        ['All'] + Service.available_categories,
         params[:category] || 'All'
       ),
       id: "category",

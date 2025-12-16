@@ -14,10 +14,17 @@
   <%= number_field :service, :price, step: 0.01, class: 'form-control' %>
 
   <%= label :service, :category, 'Category', class: 'col-form-label' %>
-    <%= select :service, :category, 
-    ['Tutoring', 'Food', 'Cleaning', 'Transportation', 'Tech Help', 'Other'], 
-    {}, 
-    class: 'form-control' %>
+
+<%= text_field :service, :category,
+    list: "category-options",
+    class: "form-control",
+    placeholder: "Choose or type a category..." %>
+
+<datalist id="category-options">
+  <% Service.available_categories.each do |cat| %>
+    <option value="<%= cat %>"></option>
+  <% end %>
+</datalist>
 
   <br/>
   <%= submit_tag 'Create Service Post', class: 'btn btn-primary' %>
