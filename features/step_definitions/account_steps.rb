@@ -57,3 +57,20 @@ end
 Then('I should see a review as client {string}') do |review_comment|
   expect(page).to have_content(review_comment)
 end
+
+
+When('I visit the profile page of vendor {string}') do |vendor_name|
+  vendor = UserAccount.find_by(name: vendor_name)
+  visit useraccount_path(vendor)  # Goes to /useraccounts/:id
+end
+
+Then('I should see a review as the client {string}') do |review_comment|
+  expect(page).to have_content(review_comment)
+end
+
+Then('I should see the vendor service {string}') do |service_title|
+  expect(page.text).to include(service_title.strip)
+end
+
+
+
