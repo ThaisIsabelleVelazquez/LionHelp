@@ -55,12 +55,22 @@
       font-family: Arial, sans-serif;">
       <h4 style="margin: 0 0 8px 0;"><%= link_to s.title, service_path(s), style: 'text-decoration: none; color: #222;' %></h4>
       <p style="margin: 0 0 8px 0;"><%= number_to_currency(s.price) %></p>
-      <small>by <%= s.vendor_name %></small>
+      <small>
+  by
+  <% vendor = @vendors_by_name[s.vendor_name] %>
+  <% if vendor %>
+   <%= link_to s.vendor_name,
+    useraccount_path(vendor.id),
+    style: 'text-decoration: underline; color: #222;' %>
+
+  <% else %>
+    <%= s.vendor_name %>
+  <% end %>
+</small>
+
       <small><strong>Category:</strong> <%= s.category.presence || "Uncategorized" %></small>
     </div>
   <% end %>
 </div>
 
-<div style="text-align: center; margin-top: 20px;">
-  <%= link_to 'Create New Service', new_service_path, class: 'btn btn-primary', style: 'margin-right: 10px;' %>
-</div>
+<div style="text-align: center; margin-top: 20px;"> <%= link_to 'Create New Service', new_service_path,style: ' padding: 10px 25px; font-size: 16px; background-color: #cfe8f3; color: #000; text-decoration: none; border-radius: 6px; display: inline-block; '%> </div>

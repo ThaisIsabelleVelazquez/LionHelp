@@ -5,31 +5,33 @@ class ServicesController < ApplicationController
     @service = Service.new
   end
 
-  def index
-    @user_name = session[:user_name]
+def index
+  @user_name = session[:user_name]
 
-    
-    @services = Service.all
+  @services = Service.all
 
-    if params[:search].present?
-      @services = @services.where(
-        "title LIKE :q OR description LIKE :q",
-        q: "%#{params[:search]}%"
-      )
-    end
-
-    
-    if params[:category].present? && params[:category] != "All"
-      @services = @services.where(category: params[:category])
-    end
-
-    
-    if params[:price_sort] == "asc"
-      @services = @services.order(price: :asc)
-    elsif params[:price_sort] == "desc"
-      @services = @services.order(price: :desc)
-    end
+  if params[:search].present?
+    @services = @services.where(
+      "title LIKE :q OR description LIKE :q",
+      q: "%#{params[:search]}%"
+    )
   end
+
+  if params[:category].present? && params[:category] != "All"
+    @services = @services.where(category: params[:category])
+  end
+
+  if params[:price_sort] == "asc"
+    @services = @services.order(price: :asc)
+  elsif params[:price_sort] == "desc"
+    @services = @services.order(price: :desc)
+  end
+
+
+  @vendors_by_name = UserAccount
+    .where(name: @services.map(&:vendor_name))
+    .index_by(&:name)
+end
 
   def create
     @service = Service.new(service_params)
