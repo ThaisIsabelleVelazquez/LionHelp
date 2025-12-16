@@ -26,6 +26,7 @@ Scenario: Create a new service
     And I fill in "Vendor Name" with "Emily"
     And I fill in "Description" with "Need help folding laundry?"
     And I fill in "Price" with "15.00"
+    And I fill in "Category" with "Cleaning"
     And I press "Create Service Post"
     Then I should see "Laundry Help"
     And I should see "Service created successfully!"
