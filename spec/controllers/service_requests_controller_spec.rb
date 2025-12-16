@@ -2,17 +2,17 @@ require 'rails_helper'
 
 RSpec.describe ServiceRequestsController, type: :controller do
   let!(:client) do
-    UserAccount.create!(name: "Alice", email: "al1234@columbia.edu", password: "Password1!")
+    UserAccount.create!(user_id: 1, name: "Alice", email: "al1234@columbia.edu", password: "Password1!")
   end
 
   let!(:vendor) do
-    UserAccount.create!(name: "Bob", email: "bb5678@columbia.edu", password: "Password1!")
+    UserAccount.create!(user_id: 2, name: "Bob", email: "bb5678@columbia.edu", password: "Password1!")
   end
 
   let!(:service) do
     Service.create!(
       title: "Test Service",
-      vendor_id: vendor.id,
+      vendor_id: vendor.user_id,
       vendor_name: vendor.name,
       price: 50,
       description: "Desc",
@@ -22,14 +22,16 @@ RSpec.describe ServiceRequestsController, type: :controller do
 
   before do
     # Simulate logged-in user
-    allow(controller).to receive(:session).and_return({ user_name: client.name })
+    # allow(controller).to receive(:session).and_return({ user_name: client.name })
+    session[:user_name] = client.name
     allow(controller).to receive(:require_login).and_return(true)
   end
 
   describe "POST #create" do
     it "creates a new service request" do
+      # session[:user_name] = client.name
       expect {
-        post :create, params: { service_request: { service_id: service.id, vendor_id: vendor.id, message: "Please help" } }
+        post :create, params: { service_request: { service_id: service.id, vendor_id: vendor.user_id, message: "Please help" } }
       }.to change(ServiceRequest, :count).by(1)
 
       sr = ServiceRequest.last
